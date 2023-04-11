@@ -26,10 +26,10 @@ data class GetLatestResponse(
 	val genres: List<GenresItem>,
 
 	@field:SerializedName("popularity")
-	val popularity: Any,
+	val popularity: Double,
 
 	@field:SerializedName("production_countries")
-	val productionCountries: List<Any>,
+	val productionCountries: List<ProductionCountriesItem>,
 
 	@field:SerializedName("id")
 	val id: Int,
@@ -62,10 +62,10 @@ data class GetLatestResponse(
 	val releaseDate: String,
 
 	@field:SerializedName("vote_average")
-	val voteAverage: Any,
+	val voteAverage: Double,
 
 	@field:SerializedName("belongs_to_collection")
-	val belongsToCollection: Any,
+	val belongsToCollection: BelongsToCollection,
 
 	@field:SerializedName("tagline")
 	val tagline: String,

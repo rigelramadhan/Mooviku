@@ -26,7 +26,7 @@ data class GetDetailResponse(
 	val genres: List<GenresItem>,
 
 	@field:SerializedName("popularity")
-	val popularity: Any,
+	val popularity: Double,
 
 	@field:SerializedName("production_countries")
 	val productionCountries: List<ProductionCountriesItem>,
@@ -62,7 +62,7 @@ data class GetDetailResponse(
 	val releaseDate: String,
 
 	@field:SerializedName("vote_average")
-	val voteAverage: Any,
+	val voteAverage: Double,
 
 	@field:SerializedName("belongs_to_collection")
 	val belongsToCollection: BelongsToCollection,
