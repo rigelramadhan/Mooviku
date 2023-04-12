@@ -46,5 +46,8 @@ data class MovieEntity(
     val adult: Boolean,
 
     @field:SerializedName("vote_count")
-    val voteCount: Int
+    val voteCount: Int,
+
+    @field:SerializedName("category")
+    val category: String,
 )

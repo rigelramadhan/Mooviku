@@ -1,0 +1,98 @@
+package com.rivibi.mooviku.core.data.repository
+
+import com.rivibi.mooviku.core.data.NetworkBoundResource
+import com.rivibi.mooviku.core.data.Resource
+import com.rivibi.mooviku.core.data.local.MovieCategory
+import com.rivibi.mooviku.core.data.local.datasource.LocalDataSource
+import com.rivibi.mooviku.core.data.remote.ApiResponse
+import com.rivibi.mooviku.core.data.remote.datasource.RemoteDataSource
+import com.rivibi.mooviku.core.data.remote.response.MoviesItem
+import com.rivibi.mooviku.core.domain.model.Movie
+import com.rivibi.mooviku.core.domain.model.MovieDetail
+import com.rivibi.mooviku.core.domain.repository.IMovieRepository
+import com.rivibi.mooviku.core.utils.AppExecutors
+import com.rivibi.mooviku.core.utils.DataMapper
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+
+class MovieRepository(
+    private val remoteDataSource: RemoteDataSource,
+    private val localDataSource: LocalDataSource,
+    private val appExecutors: AppExecutors,
+) : IMovieRepository {
+    override fun getNowPlaying(page: Int): Flow<Resource<List<Movie>>> =
+        object : NetworkBoundResource<List<Movie>, List<MoviesItem>>(appExecutors) {
+            override fun loadFromDB(): Flow<List<Movie>> {
+                return localDataSource.getNowPlaying().map { DataMapper.mapEntityToDomain(it) }
+            }
+
+            override suspend fun createCall(): Flow<ApiResponse<List<MoviesItem>>> {
+                return remoteDataSource.getNowPlaying()
+            }
+
+            override suspend fun saveCallResult(data: List<MoviesItem>) {
+                localDataSource.insertMovies(
+                    DataMapper.mapResponseToEntity(
+                        data,
+                        MovieCategory.NowPlaying.name
+                    )
+                )
+            }
+
+            override fun shouldFetch(data: List<Movie>?) = true
+        }.asFlow()
+
+    override fun getPopular(page: Int): Flow<Resource<List<Movie>>> =
+        object : NetworkBoundResource<List<Movie>, List<MoviesItem>>(appExecutors) {
+            override fun loadFromDB(): Flow<List<Movie>> {
+                return localDataSource.getPopularMovies().map { DataMapper.mapEntityToDomain(it) }
+            }
+
+            override suspend fun createCall(): Flow<ApiResponse<List<MoviesItem>>> {
+                return remoteDataSource.getPopular()
+            }
+
+            override suspend fun saveCallResult(data: List<MoviesItem>) {
+                localDataSource.insertMovies(
+                    DataMapper.mapResponseToEntity(
+                        data,
+                        MovieCategory.Popular.name
+                    )
+                )
+            }
+
+            override fun shouldFetch(data: List<Movie>?) = true
+        }.asFlow()
+
+    override fun getTopRated(page: Int): Flow<Resource<List<Movie>>> =
+        object : NetworkBoundResource<List<Movie>, List<MoviesItem>>(appExecutors) {
+            override fun loadFromDB(): Flow<List<Movie>> {
+                return localDataSource.getTopRated().map { DataMapper.mapEntityToDomain(it) }
+            }
+
+            override suspend fun createCall(): Flow<ApiResponse<List<MoviesItem>>> {
+                return remoteDataSource.getTopRated()
+            }
+
+            override suspend fun saveCallResult(data: List<MoviesItem>) {
+                localDataSource.insertMovies(
+                    DataMapper.mapResponseToEntity(
+                        data,
+                        MovieCategory.TopRated.name
+                    )
+                )
+            }
+
+            override fun shouldFetch(data: List<Movie>?) = true
+        }.asFlow()
+
+    override fun getDiscover(page: Int): Flow<Resource<List<Movie>>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getMovieDetail(movieId: Int): Flow<Resource<MovieDetail>> {
+        TODO("Not yet implemented")
+    }
+
+
+}
