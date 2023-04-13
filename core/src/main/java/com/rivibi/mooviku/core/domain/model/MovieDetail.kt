@@ -1,7 +1,6 @@
 package com.rivibi.mooviku.core.domain.model
 
 data class MovieDetail(
-
     val originalLanguage: String,
     val imdbId: String,
     val video: Boolean,

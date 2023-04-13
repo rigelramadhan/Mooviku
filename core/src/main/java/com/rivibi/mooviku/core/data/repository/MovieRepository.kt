@@ -86,13 +86,29 @@ class MovieRepository(
             override fun shouldFetch(data: List<Movie>?) = true
         }.asFlow()
 
-    override fun getDiscover(page: Int): Flow<Resource<List<Movie>>> {
-        TODO("Not yet implemented")
-    }
+    override fun getDiscover(page: Int): Flow<Resource<List<Movie>>> =
+        object : NetworkBoundResource<List<Movie>, List<MoviesItem>>(appExecutors) {
+            override fun loadFromDB(): Flow<List<Movie>> {
+                return localDataSource.getDiscover().map { DataMapper.mapEntityToDomain(it) }
+            }
 
-    override fun getMovieDetail(movieId: Int): Flow<Resource<MovieDetail>> {
-        TODO("Not yet implemented")
-    }
+            override suspend fun createCall(): Flow<ApiResponse<List<MoviesItem>>> {
+                return remoteDataSource.getDiscover()
+            }
 
+            override suspend fun saveCallResult(data: List<MoviesItem>) {
+                localDataSource.insertMovies(
+                    DataMapper.mapResponseToEntity(
+                        data,
+                        MovieCategory.Discover.name
+                    )
+                )
+            }
 
+            override fun shouldFetch(data: List<Movie>?) = true
+
+        }.asFlow()
+
+    override fun getMovieDetail(movieId: Int): Flow<Resource<MovieDetail>> =
+        remoteDataSource.getMovieDetail(movieId)
 }

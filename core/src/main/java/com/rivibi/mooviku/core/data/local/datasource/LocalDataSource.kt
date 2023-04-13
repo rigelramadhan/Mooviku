@@ -20,5 +20,9 @@ class LocalDataSource private constructor(
         return movieDao.getMoviesByCategory(MovieCategory.TopRated.name)
     }
 
+    fun getDiscover(): Flow<List<MovieEntity>> {
+        return movieDao.getMoviesByCategory(MovieCategory.Discover.name)
+    }
+
     suspend fun insertMovies(movies: List<MovieEntity>) = movieDao.insertMovies(movies)
 }

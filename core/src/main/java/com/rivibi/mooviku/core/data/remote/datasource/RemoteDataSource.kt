@@ -1,10 +1,12 @@
 package com.rivibi.mooviku.core.data.remote.datasource
 
+import com.rivibi.mooviku.core.data.Resource
 import com.rivibi.mooviku.core.data.remote.ApiResponse
 import com.rivibi.mooviku.core.data.remote.ApiResponseMethod
 import com.rivibi.mooviku.core.data.remote.network.ApiService
-import com.rivibi.mooviku.core.data.remote.response.GetDetailResponse
 import com.rivibi.mooviku.core.data.remote.response.MoviesItem
+import com.rivibi.mooviku.core.domain.model.MovieDetail
+import com.rivibi.mooviku.core.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -87,13 +89,14 @@ class RemoteDataSource private constructor(
         }
     }
 
-    fun getMovieDetail(movieId: Int): Flow<ApiResponse<GetDetailResponse>> {
+    fun getMovieDetail(movieId: Int): Flow<Resource<MovieDetail>> {
         return flow {
             try {
                 val response = apiService.getMovieDetail(movieId = movieId)
-                emit(ApiResponse.Success(response))
+                val data = DataMapper.mapDetailResponseToDomain(response)
+                emit(Resource.Success(data))
             } catch (e: Exception) {
-                emit(ApiResponse.Error(ApiResponseMethod.ERROR_ELSE, e.message.toString()))
+                emit(Resource.Error(e.message.toString()))
             }
         }
     }
