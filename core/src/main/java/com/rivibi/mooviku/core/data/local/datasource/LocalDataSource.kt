@@ -4,8 +4,11 @@ import com.rivibi.mooviku.core.data.local.MovieCategory
 import com.rivibi.mooviku.core.data.local.room.database.MovieDao
 import com.rivibi.mooviku.core.data.local.room.entity.MovieEntity
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class LocalDataSource private constructor(
+@Singleton
+class LocalDataSource @Inject private constructor(
     private val movieDao: MovieDao
 ) {
     fun getPopularMovies(): Flow<List<MovieEntity>> {

@@ -9,8 +9,11 @@ import com.rivibi.mooviku.core.domain.model.MovieDetail
 import com.rivibi.mooviku.core.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class RemoteDataSource private constructor(
+@Singleton
+class RemoteDataSource @Inject private constructor(
     private val apiService: ApiService
 ) {
     fun getNowPlaying(

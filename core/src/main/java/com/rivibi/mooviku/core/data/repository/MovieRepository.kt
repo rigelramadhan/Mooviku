@@ -14,8 +14,11 @@ import com.rivibi.mooviku.core.utils.AppExecutors
 import com.rivibi.mooviku.core.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class MovieRepository(
+@Singleton
+class MovieRepository @Inject private constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors,

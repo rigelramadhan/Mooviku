@@ -2,6 +2,7 @@ package com.rivibi.mooviku.core.di
 
 import android.content.Context
 import androidx.room.Room
+import com.rivibi.mooviku.core.data.local.room.database.MovieDao
 import com.rivibi.mooviku.core.data.local.room.database.MovieDatabase
 import dagger.Module
 import dagger.Provides
@@ -19,4 +20,7 @@ object DatabaseModule {
     fun provideDatabase(@ApplicationContext context: Context): MovieDatabase =
         Room.databaseBuilder(context, MovieDatabase::class.java, "movie.db")
             .fallbackToDestructiveMigration().build()
+
+    @Provides
+    fun provideDao(database: MovieDatabase): MovieDao = database.getDao()
 }
