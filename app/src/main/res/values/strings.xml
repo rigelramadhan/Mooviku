@@ -18,4 +18,8 @@
     <string name="placeholder_language">English</string>
     <string name="label_country_of_origin">Country of Origin</string>
     <string name="placeholder_country_of_origin">United States</string>
+    <string name="reviews">Reviews</string>
+    <string name="description_profile_avatar">Profile avatar</string>
+    <string name="placeholder_profile_name">Profile Name</string>
+    <string name="label_more_like_this">More Like This</string>
 </resources>
