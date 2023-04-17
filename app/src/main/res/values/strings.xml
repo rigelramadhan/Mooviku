@@ -5,4 +5,17 @@
     <string name="label_popular">Popular</string>
     <string name="label_home">Home</string>
     <string name="search">Search</string>
+    <string name="label_top_rated">Top Rated</string>
+    <string name="save">Save</string>
+    <string name="description_movie_poster">Movie poster</string>
+    <string name="placeholder_review">8.0</string>
+    <string name="description_release_date">Release date</string>
+    <string name="placeholder_date_dd_mmm_yyyy">20 December 2017</string>
+    <string name="genre">Genre</string>
+    <string name="placeholder_description">In the heart of the jungle lies a mysterious board game, Jumanji, which has the power to transport its players into a wild and dangerous world. When four... see more</string>
+    <string name="details">Details</string>
+    <string name="languages">Languages</string>
+    <string name="placeholder_language">English</string>
+    <string name="label_country_of_origin">Country of Origin</string>
+    <string name="placeholder_country_of_origin">United States</string>
 </resources>

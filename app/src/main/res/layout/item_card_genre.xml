@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="14dp"
+    android:paddingVertical="2dp"
+    android:layout_marginEnd="4dp"
+    android:background="@drawable/dr_rectangle_rounded_corner"
+    android:backgroundTint="#DFDFDF"
+    tools:clipToOutline="true">
+
+    <TextView
+        android:id="@+id/tv_genre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/genre"/>
+
+</LinearLayout>
