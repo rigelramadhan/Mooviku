@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
@@ -10,11 +10,9 @@ plugins {
 apply from: '../shared_dependencies.gradle'
 
 android {
-    namespace 'com.rivibi.mooviku.core'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.rivibi.mooviku.core"
         minSdk 21
         targetSdk 33
         versionCode 1

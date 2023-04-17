@@ -8,7 +8,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class LocalDataSource @Inject private constructor(
+class LocalDataSource @Inject constructor(
     private val movieDao: MovieDao
 ) {
     fun getPopularMovies(): Flow<List<MovieEntity>> {

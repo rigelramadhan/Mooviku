@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Mooviku</string>
+    <string name="content_description_movie_image">Movie image</string>
+    <string name="placeholder_movie_name">Movie Name</string>
+    <string name="label_popular">Popular</string>
+    <string name="label_home">Home</string>
+    <string name="search">Search</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.rivibi.mooviku.core.utils
 
+import com.rivibi.mooviku.core.data.local.room.entity.GenreList
 import com.rivibi.mooviku.core.data.local.room.entity.MovieEntity
 import com.rivibi.mooviku.core.data.remote.response.GetDetailResponse
 import com.rivibi.mooviku.core.data.remote.response.MoviesItem
@@ -14,7 +15,7 @@ object DataMapper {
                 originalTitle = it.originalTitle,
                 video = it.video,
                 title = it.title,
-                genreIds = it.genreIds,
+                genreIds = GenreList(it.genreIds),
                 posterPath = it.posterPath,
                 backdropPath = it.backdropPath,
                 releaseDate = it.releaseDate,
@@ -35,7 +36,7 @@ object DataMapper {
                 originalTitle = it.originalTitle,
                 video = it.video,
                 title = it.title,
-                genreIds = it.genreIds,
+                genreIds = it.genreIds.genreIds,
                 posterPath = it.posterPath,
                 backdropPath = it.backdropPath,
                 releaseDate = it.releaseDate,

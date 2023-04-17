@@ -1,8 +1,10 @@
 package com.rivibi.mooviku.core.data.local.room.entity
 
+import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "movies")
 data class MovieEntity(
 
     @field:SerializedName("overview")
@@ -21,7 +23,7 @@ data class MovieEntity(
     val title: String,
 
     @field:SerializedName("genre_ids")
-    val genreIds: List<Int>,
+    val genreIds: GenreList,
 
     @field:SerializedName("poster_path")
     val posterPath: String,

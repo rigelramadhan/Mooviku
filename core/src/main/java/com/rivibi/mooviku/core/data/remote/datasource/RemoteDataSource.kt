@@ -13,7 +13,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class RemoteDataSource @Inject private constructor(
+class RemoteDataSource @Inject constructor(
     private val apiService: ApiService
 ) {
     fun getNowPlaying(

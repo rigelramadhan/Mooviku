@@ -15,7 +15,7 @@ buildscript {
         hilt_version = '2.44'
 
         // CORE
-        room_version = '2.5.0'
+        room_version = '2.5.1'
         retrofit_version = '2.9.0'
         logging_interceptor_version = '5.0.0-alpha.11'
         kotlin_coroutines_version = '1.6.4'
