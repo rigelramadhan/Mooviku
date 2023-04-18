@@ -1,12 +1,22 @@
 package com.rivibi.mooviku.core.utils
 
+import com.rivibi.mooviku.core.data.ImageConfig
 import com.rivibi.mooviku.core.data.local.room.entity.GenreList
 import com.rivibi.mooviku.core.data.local.room.entity.MovieEntity
 import com.rivibi.mooviku.core.data.remote.response.GetDetailResponse
 import com.rivibi.mooviku.core.data.remote.response.MoviesItem
-import com.rivibi.mooviku.core.domain.model.*
+import com.rivibi.mooviku.core.domain.model.BelongsToCollection
+import com.rivibi.mooviku.core.domain.model.Genres
+import com.rivibi.mooviku.core.domain.model.Movie
+import com.rivibi.mooviku.core.domain.model.MovieDetail
+import com.rivibi.mooviku.core.domain.model.ProductionCompanies
+import com.rivibi.mooviku.core.domain.model.ProductionCountries
+import com.rivibi.mooviku.core.domain.model.SpokenLanguages
 
 object DataMapper {
+    private fun generateImageLink(imgSize: String, path: String): String =
+        "${ImageConfig.IMAGE_URL}$imgSize/$path"
+
     fun mapResponseToEntity(input: List<MoviesItem>, category: String): List<MovieEntity> =
         input.map {
             MovieEntity(
@@ -16,8 +26,8 @@ object DataMapper {
                 video = it.video,
                 title = it.title,
                 genreIds = GenreList(it.genreIds),
-                posterPath = it.posterPath,
-                backdropPath = it.backdropPath,
+                posterPath = generateImageLink(ImageConfig.PosterSize.W500.size, it.posterPath),
+                backdropPath = generateImageLink(ImageConfig.BackdropSize.W700.size, it.backdropPath),
                 releaseDate = it.releaseDate,
                 popularity = it.popularity,
                 voteAverage = it.voteAverage,
@@ -55,7 +65,7 @@ object DataMapper {
             imdbId = input.imdbId,
             video = input.video,
             title = input.title,
-            backdropPath = input.backdropPath,
+            backdropPath = generateImageLink(ImageConfig.BackdropSize.W700.size, input.backdropPath),
             revenue = input.revenue,
             genres = input.genres.map { Genres(it.name, it.id) },
             popularity = input.popularity,
@@ -71,7 +81,7 @@ object DataMapper {
             overview = input.overview,
             originalTitle = input.originalTitle,
             runtime = input.runtime,
-            posterPath = input.posterPath,
+            posterPath = generateImageLink(ImageConfig.PosterSize.W500.size, input.posterPath),
             spokenLanguages = input.spokenLanguages.map {
                 SpokenLanguages(
                     it.name,
