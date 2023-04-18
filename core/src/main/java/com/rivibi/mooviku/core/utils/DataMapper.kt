@@ -5,12 +5,15 @@ import com.rivibi.mooviku.core.data.local.room.entity.GenreList
 import com.rivibi.mooviku.core.data.local.room.entity.MovieEntity
 import com.rivibi.mooviku.core.data.remote.response.GetDetailResponse
 import com.rivibi.mooviku.core.data.remote.response.MoviesItem
+import com.rivibi.mooviku.core.data.remote.response.ReviewItem
+import com.rivibi.mooviku.core.domain.model.AuthorDetails
 import com.rivibi.mooviku.core.domain.model.BelongsToCollection
 import com.rivibi.mooviku.core.domain.model.Genres
 import com.rivibi.mooviku.core.domain.model.Movie
 import com.rivibi.mooviku.core.domain.model.MovieDetail
 import com.rivibi.mooviku.core.domain.model.ProductionCompanies
 import com.rivibi.mooviku.core.domain.model.ProductionCountries
+import com.rivibi.mooviku.core.domain.model.Review
 import com.rivibi.mooviku.core.domain.model.SpokenLanguages
 
 object DataMapper {
@@ -27,7 +30,10 @@ object DataMapper {
                 title = it.title,
                 genreIds = GenreList(it.genreIds),
                 posterPath = generateImageLink(ImageConfig.PosterSize.W500.size, it.posterPath),
-                backdropPath = generateImageLink(ImageConfig.BackdropSize.W700.size, it.backdropPath),
+                backdropPath = generateImageLink(
+                    ImageConfig.BackdropSize.W700.size,
+                    it.backdropPath
+                ),
                 releaseDate = it.releaseDate,
                 popularity = it.popularity,
                 voteAverage = it.voteAverage,
@@ -65,7 +71,10 @@ object DataMapper {
             imdbId = input.imdbId,
             video = input.video,
             title = input.title,
-            backdropPath = generateImageLink(ImageConfig.BackdropSize.W700.size, input.backdropPath),
+            backdropPath = generateImageLink(
+                ImageConfig.BackdropSize.W700.size,
+                input.backdropPath
+            ),
             revenue = input.revenue,
             genres = input.genres.map { Genres(it.name, it.id) },
             popularity = input.popularity,
@@ -110,4 +119,26 @@ object DataMapper {
             homepage = input.homepage,
             status = input.status
         )
+
+    fun mapReviewsResponseToDomain(input: List<ReviewItem>) = input.map {
+        val authorDetails = AuthorDetails(
+            avatarPath = generateImageLink(
+                ImageConfig.ProfileSize.W185.size,
+                it.authorDetails.avatarPath
+            ),
+            name = it.authorDetails.name,
+            rating = it.authorDetails.rating,
+            username = it.authorDetails.username
+        )
+
+        Review(
+            authorDetails = authorDetails,
+            updatedAt = it.updatedAt,
+            author = it.author,
+            createdAt = it.createdAt,
+            id = it.id,
+            content = it.content,
+            url = it.url
+        )
+    }
 }

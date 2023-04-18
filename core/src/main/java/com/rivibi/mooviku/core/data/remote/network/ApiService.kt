@@ -51,4 +51,10 @@ interface ApiService {
         @Query("api_key") apiKey: String = ApiConfig.API_KEY,
         @Path("movie_id") movieId: Int
     ): GetDetailResponse
+
+    @GET("/movie/{movie_id}/reviews")
+    fun getMovieReviews(
+        @Query("api_key") apiKey: String = ApiConfig.API_KEY,
+        @Path("movie_id") movieId: Int,
+    ): GetMovieReviewResponse
 }

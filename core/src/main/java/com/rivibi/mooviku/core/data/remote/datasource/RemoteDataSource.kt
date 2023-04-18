@@ -6,6 +6,7 @@ import com.rivibi.mooviku.core.data.remote.ApiResponseMethod
 import com.rivibi.mooviku.core.data.remote.network.ApiService
 import com.rivibi.mooviku.core.data.remote.response.MoviesItem
 import com.rivibi.mooviku.core.domain.model.MovieDetail
+import com.rivibi.mooviku.core.domain.model.Review
 import com.rivibi.mooviku.core.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -97,6 +98,18 @@ class RemoteDataSource @Inject constructor(
             try {
                 val response = apiService.getMovieDetail(movieId = movieId)
                 val data = DataMapper.mapDetailResponseToDomain(response)
+                emit(Resource.Success(data))
+            } catch (e: Exception) {
+                emit(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    fun getMovieReviews(movieId: Int): Flow<Resource<List<Review>>> {
+        return flow {
+            try {
+                val response = apiService.getMovieReviews(movieId = movieId)
+                val data = DataMapper.mapReviewsResponseToDomain(response.results)
                 emit(Resource.Success(data))
             } catch (e: Exception) {
                 emit(Resource.Error(e.message.toString()))
