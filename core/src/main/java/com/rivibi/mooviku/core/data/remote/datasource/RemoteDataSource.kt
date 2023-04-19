@@ -5,6 +5,7 @@ import com.rivibi.mooviku.core.data.remote.ApiResponse
 import com.rivibi.mooviku.core.data.remote.ApiResponseMethod
 import com.rivibi.mooviku.core.data.remote.network.ApiService
 import com.rivibi.mooviku.core.data.remote.response.MoviesItem
+import com.rivibi.mooviku.core.domain.model.Movie
 import com.rivibi.mooviku.core.domain.model.MovieDetail
 import com.rivibi.mooviku.core.domain.model.Review
 import com.rivibi.mooviku.core.utils.DataMapper
@@ -113,6 +114,24 @@ class RemoteDataSource @Inject constructor(
                 emit(Resource.Success(data))
             } catch (e: Exception) {
                 emit(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    fun getMovieRecommendations(movieId: Int): Flow<Resource<List<Movie>>> {
+        return flow {
+            try {
+                val response = apiService.getMovieRecommendations(movieId = movieId)
+                val entities = DataMapper.mapResponseToEntity(response.results, category = "Others")
+                val data = DataMapper.mapEntityToDomain(entities)
+
+                if (data.isNotEmpty()) {
+                    emit(Resource.Success(data))
+                } else {
+                    emit(Resource.Error(ApiResponseMethod.ERROR_404.name))
+                }
+            } catch (e: Exception) {
+                emit(Resource.Error(e.message))
             }
         }
     }

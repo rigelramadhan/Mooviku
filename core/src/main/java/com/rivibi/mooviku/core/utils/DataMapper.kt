@@ -100,7 +100,7 @@ object DataMapper {
             },
             productionCompanies = input.productionCompanies.map {
                 ProductionCompanies(
-                    it.logoPath,
+                    generateImageLink(ImageConfig.LogoSize.W300.size, it.logoPath),
                     it.name,
                     it.id,
                     it.originCountry
@@ -109,10 +109,16 @@ object DataMapper {
             releaseDate = input.releaseDate,
             voteAverage = input.voteAverage,
             belongsToCollection = BelongsToCollection(
-                input.belongsToCollection.backdropPath,
+                backdropPath = generateImageLink(
+                    ImageConfig.BackdropSize.W700.size,
+                    input.belongsToCollection.backdropPath
+                ),
                 input.belongsToCollection.name,
                 input.belongsToCollection.id,
-                input.belongsToCollection.posterPath
+                generateImageLink(
+                    ImageConfig.PosterSize.W500.size,
+                    input.belongsToCollection.posterPath
+                ),
             ),
             tagline = input.tagline,
             adult = input.adult,

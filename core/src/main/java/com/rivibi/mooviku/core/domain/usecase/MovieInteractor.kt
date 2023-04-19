@@ -3,10 +3,14 @@ package com.rivibi.mooviku.core.domain.usecase
 import com.rivibi.mooviku.core.data.Resource
 import com.rivibi.mooviku.core.domain.model.Movie
 import com.rivibi.mooviku.core.domain.model.MovieDetail
+import com.rivibi.mooviku.core.domain.model.Review
 import com.rivibi.mooviku.core.domain.repository.IMovieRepository
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class MovieInteractor(private val movieRepository: IMovieRepository) : MovieUseCase {
+class MovieInteractor @Inject constructor(
+    private val movieRepository: IMovieRepository
+) : MovieUseCase {
     override fun getNowPlaying(page: Int): Flow<Resource<List<Movie>>> =
         movieRepository.getNowPlaying()
 
@@ -21,4 +25,12 @@ class MovieInteractor(private val movieRepository: IMovieRepository) : MovieUseC
 
     override fun getMovieDetail(movieId: Int): Flow<Resource<MovieDetail>> =
         movieRepository.getMovieDetail(movieId)
+
+    override fun getReviews(movieId: Int): Flow<Resource<List<Review>>> =
+        movieRepository.getReviews(movieId)
+
+    override fun getMovieRecommendations(movieId: Int): Flow<Resource<List<Movie>>> =
+        movieRepository.getMovieRecommendations(movieId)
+
+
 }

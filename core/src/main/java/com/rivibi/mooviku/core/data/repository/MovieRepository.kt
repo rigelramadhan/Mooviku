@@ -9,6 +9,7 @@ import com.rivibi.mooviku.core.data.remote.datasource.RemoteDataSource
 import com.rivibi.mooviku.core.data.remote.response.MoviesItem
 import com.rivibi.mooviku.core.domain.model.Movie
 import com.rivibi.mooviku.core.domain.model.MovieDetail
+import com.rivibi.mooviku.core.domain.model.Review
 import com.rivibi.mooviku.core.domain.repository.IMovieRepository
 import com.rivibi.mooviku.core.utils.AppExecutors
 import com.rivibi.mooviku.core.utils.DataMapper
@@ -114,4 +115,10 @@ class MovieRepository @Inject constructor(
 
     override fun getMovieDetail(movieId: Int): Flow<Resource<MovieDetail>> =
         remoteDataSource.getMovieDetail(movieId)
+
+    override fun getReviews(movieId: Int): Flow<Resource<List<Review>>> =
+        remoteDataSource.getMovieReviews(movieId)
+
+    override fun getMovieRecommendations(movieId: Int): Flow<Resource<List<Movie>>> =
+        remoteDataSource.getMovieRecommendations(movieId)
 }

@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.rivibi.mooviku.adapter.MovieListAdapter
 import com.rivibi.mooviku.databinding.ActivityMainBinding
 import com.rivibi.mooviku.ui.detail.DetailActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val binding: ActivityMainBinding by lazy {
