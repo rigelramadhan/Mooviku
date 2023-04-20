@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiConfig {
     const val API_KEY = "41914f0e3b5bbb109fe6d762f3fc0cca"
-    private const val BASE_URL = "https://api.themoviedb.org/3"
+    private const val BASE_URL = "https://api.themoviedb.org/3/"
     private const val IMAGE_URL = "https://image.tmdb.org/t/p/"
 
     fun getApiService(): ApiService {

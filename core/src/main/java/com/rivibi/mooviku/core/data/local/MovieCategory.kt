@@ -1,6 +1,6 @@
 package com.rivibi.mooviku.core.data.local
 
-enum class MovieCategory(category: String) {
+enum class MovieCategory(val category: String) {
     Discover("discover"),
     Popular("popular"),
     NowPlaying("now_playing"),

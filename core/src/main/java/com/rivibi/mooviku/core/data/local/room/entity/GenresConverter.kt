@@ -5,7 +5,7 @@ import androidx.room.TypeConverter
 class GenresConverter {
     @TypeConverter
     fun storedStringToGenres(value: String): GenreList {
-        val genres = value.split("\\s*,\\s*").map { it.toInt() }
+        val genres = value.split(",").filter { it.isNotEmpty() }.map { it.toInt() }
         return GenreList(genres)
     }
 

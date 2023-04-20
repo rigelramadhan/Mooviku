@@ -29,9 +29,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupView()
+
+        binding.tvMovieHomePopular.setOnClickListener {
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra(DetailActivity.EXTRA_MOVIE_ID, 24)
+            startActivity(intent)
+        }
     }
 
     private fun setupView() {
+        viewModel.loadData()
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { mainUiState ->
@@ -39,6 +46,18 @@ class MainActivity : AppCompatActivity() {
                         is MainUiState.Success -> {
                             val popularMovies = mainUiState.popularMovies
                             val topRatedMovies = mainUiState.topRatedMovies
+
+                            if (popularMovies.isEmpty()) Toast.makeText(
+                                this@MainActivity,
+                                "Popular empty",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                            if (topRatedMovies.isEmpty()) Toast.makeText(
+                                this@MainActivity,
+                                "Top rated empty",
+                                Toast.LENGTH_SHORT
+                            ).show()
 
                             binding.rvMovieHomePopular.apply {
                                 adapter = MovieListAdapter(popularMovies) { movieId ->

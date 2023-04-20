@@ -12,19 +12,19 @@ class LocalDataSource @Inject constructor(
     private val movieDao: MovieDao
 ) {
     fun getPopularMovies(): Flow<List<MovieEntity>> {
-        return movieDao.getMoviesByCategory(MovieCategory.Popular.name)
+        return movieDao.getMoviesByCategory(MovieCategory.Popular.category)
     }
 
     fun getNowPlaying(): Flow<List<MovieEntity>> {
-        return movieDao.getMoviesByCategory(MovieCategory.NowPlaying.name)
+        return movieDao.getMoviesByCategory(MovieCategory.NowPlaying.category)
     }
 
     fun getTopRated(): Flow<List<MovieEntity>> {
-        return movieDao.getMoviesByCategory(MovieCategory.TopRated.name)
+        return movieDao.getMoviesByCategory(MovieCategory.TopRated.category)
     }
 
     fun getDiscover(): Flow<List<MovieEntity>> {
-        return movieDao.getMoviesByCategory(MovieCategory.Discover.name)
+        return movieDao.getMoviesByCategory(MovieCategory.Discover.category)
     }
 
     suspend fun insertMovies(movies: List<MovieEntity>) = movieDao.insertMovies(movies)

@@ -25,7 +25,7 @@ class MovieRepository @Inject constructor(
     private val appExecutors: AppExecutors,
 ) : IMovieRepository {
     override fun getNowPlaying(page: Int): Flow<Resource<List<Movie>>> =
-        object : NetworkBoundResource<List<Movie>, List<MoviesItem>>(appExecutors) {
+        object : NetworkBoundResource<List<Movie>, List<MoviesItem>>() {
             override fun loadFromDB(): Flow<List<Movie>> {
                 return localDataSource.getNowPlaying().map { DataMapper.mapEntityToDomain(it) }
             }
@@ -38,7 +38,7 @@ class MovieRepository @Inject constructor(
                 localDataSource.insertMovies(
                     DataMapper.mapResponseToEntity(
                         data,
-                        MovieCategory.NowPlaying.name
+                        MovieCategory.NowPlaying.category
                     )
                 )
             }
@@ -47,7 +47,7 @@ class MovieRepository @Inject constructor(
         }.asFlow()
 
     override fun getPopular(page: Int): Flow<Resource<List<Movie>>> =
-        object : NetworkBoundResource<List<Movie>, List<MoviesItem>>(appExecutors) {
+        object : NetworkBoundResource<List<Movie>, List<MoviesItem>>() {
             override fun loadFromDB(): Flow<List<Movie>> {
                 return localDataSource.getPopularMovies().map { DataMapper.mapEntityToDomain(it) }
             }
@@ -60,7 +60,7 @@ class MovieRepository @Inject constructor(
                 localDataSource.insertMovies(
                     DataMapper.mapResponseToEntity(
                         data,
-                        MovieCategory.Popular.name
+                        MovieCategory.Popular.category
                     )
                 )
             }
@@ -69,7 +69,7 @@ class MovieRepository @Inject constructor(
         }.asFlow()
 
     override fun getTopRated(page: Int): Flow<Resource<List<Movie>>> =
-        object : NetworkBoundResource<List<Movie>, List<MoviesItem>>(appExecutors) {
+        object : NetworkBoundResource<List<Movie>, List<MoviesItem>>() {
             override fun loadFromDB(): Flow<List<Movie>> {
                 return localDataSource.getTopRated().map { DataMapper.mapEntityToDomain(it) }
             }
@@ -82,7 +82,7 @@ class MovieRepository @Inject constructor(
                 localDataSource.insertMovies(
                     DataMapper.mapResponseToEntity(
                         data,
-                        MovieCategory.TopRated.name
+                        MovieCategory.TopRated.category
                     )
                 )
             }
@@ -91,7 +91,7 @@ class MovieRepository @Inject constructor(
         }.asFlow()
 
     override fun getDiscover(page: Int): Flow<Resource<List<Movie>>> =
-        object : NetworkBoundResource<List<Movie>, List<MoviesItem>>(appExecutors) {
+        object : NetworkBoundResource<List<Movie>, List<MoviesItem>>() {
             override fun loadFromDB(): Flow<List<Movie>> {
                 return localDataSource.getDiscover().map { DataMapper.mapEntityToDomain(it) }
             }
@@ -104,7 +104,7 @@ class MovieRepository @Inject constructor(
                 localDataSource.insertMovies(
                     DataMapper.mapResponseToEntity(
                         data,
-                        MovieCategory.Discover.name
+                        MovieCategory.Discover.category
                     )
                 )
             }

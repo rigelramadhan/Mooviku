@@ -1,7 +1,10 @@
 package com.rivibi.mooviku.ui.home
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.rivibi.mooviku.core.data.Resource
 import com.rivibi.mooviku.core.domain.model.Movie
 import com.rivibi.mooviku.core.domain.usecase.MovieUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,11 +23,10 @@ class MainViewModel @Inject constructor(
     private val _uiState: MutableStateFlow<MainUiState> = MutableStateFlow(MainUiState.Loading())
     val uiState: StateFlow<MainUiState> get() = _uiState
 
-    init {
-        loadData()
-    }
+    private val _popular = MutableLiveData<Resource<List<Movie>>>(Resource.Loading())
+    val popular: LiveData<Resource<List<Movie>>> get() = _popular
 
-    private fun loadData() {
+    fun loadData() {
         viewModelScope.launch {
             val popularMoviesFlow = movieUseCase.getPopular()
             val topRatedMoviesFlow = movieUseCase.getTopRated()
@@ -35,6 +37,7 @@ class MainViewModel @Inject constructor(
                     topRated.data ?: emptyList(),
                 )
             }.catch {
+                it.printStackTrace()
                 _uiState.value = MainUiState.Error(it)
             }.collect { mainUiState ->
                 _uiState.value = mainUiState
