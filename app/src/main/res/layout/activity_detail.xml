@@ -21,6 +21,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:menu="@menu/detail_menu"
@@ -44,8 +45,8 @@
             <ImageView
                 android:id="@+id/img_movie_detail_poster"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintDimensionRatio="1:1"
+                android:layout_height="wrap_content"
+                android:layout_margin="32dp"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars"
                 android:contentDescription="@string/description_movie_poster"/>
@@ -54,12 +55,14 @@
                 android:id="@+id/progress_bar_review"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
+                android:progress="100"
                 app:layout_constraintTop_toBottomOf="@id/img_movie_detail_poster"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="24dp"
                 android:layout_marginStart="8dp"/>
             
             <TextView
+                android:id="@+id/tv_review_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@id/progress_bar_review"
@@ -162,6 +165,7 @@
                             <View android:layout_width="16dp"/>
 
                             <TextView
+                                android:id="@+id/tv_detail_language"
                                 android:text="@string/placeholder_language"/>
                         </TableRow>
 
@@ -172,6 +176,7 @@
                             <View android:layout_width="16dp"/>
 
                             <TextView
+                                android:id="@+id/tv_detail_origin"
                                 android:text="@string/placeholder_country_of_origin"/>
                         </TableRow>
                     </TableLayout>

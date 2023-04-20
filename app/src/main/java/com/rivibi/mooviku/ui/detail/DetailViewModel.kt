@@ -41,6 +41,7 @@ class DetailViewModel @Inject constructor(
                     movieRecommendations.data ?: emptyList(),
                 )
             }.catch {
+                it.printStackTrace()
                 _uiState.value = DetailUiState.Error(it)
             }.collect { detailUiState ->
                 _uiState.value = detailUiState

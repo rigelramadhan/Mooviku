@@ -37,6 +37,7 @@ class MovieListAdapter(private val list: List<Movie>, private val onClick: (Int)
 
                 Glide.with(binding.root.context)
                     .load(movie.posterPath)
+                    .centerCrop()
                     .into(it.imgMovieCard)
             }
         }

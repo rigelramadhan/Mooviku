@@ -17,6 +17,7 @@ import com.rivibi.mooviku.adapter.MovieListAdapter
 import com.rivibi.mooviku.databinding.ActivityDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.text.DecimalFormat
 
 @AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
@@ -39,6 +40,8 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.toolbar)
+
         setupView()
     }
 
@@ -54,7 +57,7 @@ class DetailActivity : AppCompatActivity() {
                             val movieRecommendations = detailUiState.movieRecommendations
 
                             if (movieDetail != null) {
-                                actionBar?.title = movieDetail.title
+                                supportActionBar?.title = movieDetail.title
 
                                 binding.apply {
                                     Glide.with(this@DetailActivity)
@@ -71,6 +74,13 @@ class DetailActivity : AppCompatActivity() {
                                             false
                                         )
                                     }
+
+                                    tvDetailMovieDescription.text = movieDetail.overview
+
+                                    val avgRating = DecimalFormat("#.#").format(movieDetail.voteAverage)
+
+                                    tvReviewRating.text = avgRating
+                                    progressBarReview.progress = movieDetail.voteAverage.times(10).toInt()
 
                                     rvReviews.apply {
                                         adapter = DetailReviewAdapter(reviews) {

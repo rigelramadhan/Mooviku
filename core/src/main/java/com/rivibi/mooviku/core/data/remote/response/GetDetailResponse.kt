@@ -20,7 +20,7 @@ data class GetDetailResponse(
 	val backdropPath: String,
 
 	@field:SerializedName("revenue")
-	val revenue: Int,
+	val revenue: Long,
 
 	@field:SerializedName("genres")
 	val genres: List<GenresItem>,
@@ -38,7 +38,7 @@ data class GetDetailResponse(
 	val voteCount: Int,
 
 	@field:SerializedName("budget")
-	val budget: Int,
+	val budget: Long,
 
 	@field:SerializedName("overview")
 	val overview: String,

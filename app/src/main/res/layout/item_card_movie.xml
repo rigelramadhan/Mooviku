@@ -4,30 +4,40 @@
     android:layout_width="150dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
+    android:focusable="true"
+    tools:foreground="?android:attr/selectableItemBackground"
     android:layout_marginHorizontal="4dp"
     android:layout_marginVertical="4dp">
 
-        <ImageView
-            android:id="@+id/img_movie_card"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_img_movie_card"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintDimensionRatio="1:1.2"
             app:layout_constraintTop_toTopOf="parent"
+            style="@style/Widget.Material3.CardView.Filled"
+            app:cardElevation="0dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/dr_rectangle_rounded_corner"
-            tools:clipToOutline="true"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/content_description_movie_image"
-            tools:srcCompat="@tools:sample/avatars"
-            />
+            app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:id="@+id/img_movie_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/dr_rectangle_rounded_corner"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/content_description_movie_image"
+                    />
+
+        </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:id="@+id/tv_movie_card_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/placeholder_movie_name"
-            app:layout_constraintTop_toBottomOf="@id/img_movie_card"
+            app:layout_constraintTop_toBottomOf="@id/card_img_movie_card"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="8dp"

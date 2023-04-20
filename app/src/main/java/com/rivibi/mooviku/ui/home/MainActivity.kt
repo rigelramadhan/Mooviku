@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
                                     val intent =
                                         Intent(this@MainActivity, DetailActivity::class.java)
                                     intent.putExtra(DetailActivity.EXTRA_MOVIE_ID, movieId)
+                                    startActivity(intent)
                                 }
 
                                 layoutManager = LinearLayoutManager(
@@ -78,6 +79,7 @@ class MainActivity : AppCompatActivity() {
                                     val intent =
                                         Intent(this@MainActivity, DetailActivity::class.java)
                                     intent.putExtra(DetailActivity.EXTRA_MOVIE_ID, movieId)
+                                    startActivity(intent)
                                 }
 
                                 layoutManager = LinearLayoutManager(
