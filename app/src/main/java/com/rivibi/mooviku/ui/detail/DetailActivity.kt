@@ -32,15 +32,15 @@ class DetailActivity : AppCompatActivity() {
         intent.getIntExtra(EXTRA_MOVIE_ID, -1)
     }
 
-    private val actionBar: ActionBar? by lazy {
-        supportActionBar
-    }
+    private var actionBar: ActionBar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
+        actionBar = supportActionBar
+        actionBar?.title = ""
 
         setupView()
     }
@@ -57,7 +57,7 @@ class DetailActivity : AppCompatActivity() {
                             val movieRecommendations = detailUiState.movieRecommendations
 
                             if (movieDetail != null) {
-                                supportActionBar?.title = movieDetail.title
+                                actionBar?.title = movieDetail.title
 
                                 binding.apply {
                                     Glide.with(this@DetailActivity)
