@@ -9,8 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     
     <color name="cyan_blue">#37F4FA</color>
-    <color name="dark_blue_bg">#0C1033</color>
-    <color name="dark_blue_bg_lighter">#1D234D</color>
+    <color name="dark_blue_bg">#080A22</color>
+    <color name="dark_blue_bg_lighter">#121739</color>
 
 
 </resources>
