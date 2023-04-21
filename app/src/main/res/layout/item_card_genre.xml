@@ -8,7 +8,7 @@
     android:paddingVertical="2dp"
     android:layout_marginEnd="4dp"
     android:background="@drawable/dr_rectangle_rounded_corner"
-    android:backgroundTint="#DFDFDF"
+    style="@style/CardContainer"
     tools:clipToOutline="true">
 
     <TextView

@@ -8,18 +8,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <com.rivibi.mooviku.customviews.CircularImageView
         android:id="@+id/img_review_avatar"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/dr_circle"
         android:contentDescription="@string/description_profile_avatar"
-        tools:srcCompat="@tools:sample/avatars"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:clipToOutline="true" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/tv_review_name"

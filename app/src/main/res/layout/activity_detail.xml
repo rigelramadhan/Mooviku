@@ -10,6 +10,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         app:liftOnScroll="true"
+        android:backgroundTint="@color/dark_blue_bg"
         android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -17,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/collapsingToolbarLayoutMediumSize"
             app:titleCollapseMode="scale"
+            android:backgroundTint="@color/dark_blue_bg"
             app:maxLines="3"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
@@ -26,6 +28,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:menu="@menu/detail_menu"
                 app:navigationIcon="@drawable/baseline_arrow_back_24"
+                android:backgroundTint="@color/dark_blue_bg_lighter"
                 app:title="@string/placeholder_movie_name"
                 app:titleTextAppearance="@style/TextAppearance.Material3.HeadlineSmall"
                 android:elevation="0dp"/>
@@ -56,6 +59,8 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:progress="100"
+                android:indeterminate="false"
+                android:max="100"
                 app:layout_constraintTop_toBottomOf="@id/img_movie_detail_poster"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="24dp"
@@ -126,6 +131,7 @@
                 android:id="@+id/card_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="#00000000"
                 app:layout_constraintTop_toBottomOf="@id/tv_detail_movie_description"
                 android:layout_marginTop="24dp"
                 android:layout_marginHorizontal="16dp">
