@@ -17,7 +17,7 @@ data class GetDetailResponse(
 	val title: String,
 
 	@field:SerializedName("backdrop_path")
-	val backdropPath: String,
+	val backdropPath: String?,
 
 	@field:SerializedName("revenue")
 	val revenue: Long,
@@ -64,9 +64,6 @@ data class GetDetailResponse(
 	@field:SerializedName("vote_average")
 	val voteAverage: Double,
 
-	@field:SerializedName("belongs_to_collection")
-	val belongsToCollection: BelongsToCollection,
-
 	@field:SerializedName("tagline")
 	val tagline: String,
 
@@ -87,19 +84,4 @@ data class ProductionCountriesItem(
 
 	@field:SerializedName("name")
 	val name: String
-)
-
-data class BelongsToCollection(
-
-	@field:SerializedName("backdrop_path")
-	val backdropPath: String,
-
-	@field:SerializedName("name")
-	val name: String,
-
-	@field:SerializedName("id")
-	val id: Int,
-
-	@field:SerializedName("poster_path")
-	val posterPath: String
 )

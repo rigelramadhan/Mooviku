@@ -64,9 +64,6 @@ data class GetLatestResponse(
 	@field:SerializedName("vote_average")
 	val voteAverage: Double,
 
-	@field:SerializedName("belongs_to_collection")
-	val belongsToCollection: BelongsToCollection,
-
 	@field:SerializedName("tagline")
 	val tagline: String,
 

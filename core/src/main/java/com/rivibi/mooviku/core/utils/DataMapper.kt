@@ -7,7 +7,6 @@ import com.rivibi.mooviku.core.data.remote.response.GetDetailResponse
 import com.rivibi.mooviku.core.data.remote.response.MoviesItem
 import com.rivibi.mooviku.core.data.remote.response.ReviewItem
 import com.rivibi.mooviku.core.domain.model.AuthorDetails
-import com.rivibi.mooviku.core.domain.model.BelongsToCollection
 import com.rivibi.mooviku.core.domain.model.Genres
 import com.rivibi.mooviku.core.domain.model.Movie
 import com.rivibi.mooviku.core.domain.model.MovieDetail
@@ -30,10 +29,10 @@ object DataMapper {
                 title = it.title,
                 genreIds = GenreList(it.genreIds),
                 posterPath = generateImageLink(ImageConfig.PosterSize.W500.size, it.posterPath),
-                backdropPath = generateImageLink(
+                backdropPath = if (it.backdropPath != null) generateImageLink(
                     ImageConfig.BackdropSize.W700.size,
                     it.backdropPath
-                ),
+                ) else it.posterPath,
                 releaseDate = it.releaseDate,
                 popularity = it.popularity,
                 voteAverage = it.voteAverage,
@@ -54,7 +53,7 @@ object DataMapper {
                 title = it.title,
                 genreIds = it.genreIds.genreIds,
                 posterPath = it.posterPath,
-                backdropPath = it.backdropPath,
+                backdropPath = it.backdropPath ,
                 releaseDate = it.releaseDate,
                 popularity = it.popularity,
                 voteAverage = it.voteAverage,
@@ -71,10 +70,10 @@ object DataMapper {
             imdbId = input.imdbId,
             video = input.video,
             title = input.title,
-            backdropPath = generateImageLink(
+            backdropPath = if (input.backdropPath != null) generateImageLink(
                 ImageConfig.BackdropSize.W700.size,
                 input.backdropPath
-            ),
+            ) else input.posterPath,
             revenue = input.revenue,
             genres = input.genres.map { Genres(it.name, it.id) },
             popularity = input.popularity,
@@ -90,7 +89,10 @@ object DataMapper {
             overview = input.overview,
             originalTitle = input.originalTitle,
             runtime = input.runtime,
-            posterPath = generateImageLink(ImageConfig.PosterSize.W500.size, input.posterPath),
+            posterPath = generateImageLink(
+                ImageConfig.PosterSize.W500.size,
+                input.posterPath
+            ),
             spokenLanguages = input.spokenLanguages.map {
                 SpokenLanguages(
                     it.name,
@@ -108,18 +110,6 @@ object DataMapper {
             },
             releaseDate = input.releaseDate,
             voteAverage = input.voteAverage,
-            belongsToCollection = BelongsToCollection(
-                backdropPath = generateImageLink(
-                    ImageConfig.BackdropSize.W700.size,
-                    input.belongsToCollection.backdropPath
-                ),
-                input.belongsToCollection.name,
-                input.belongsToCollection.id,
-                generateImageLink(
-                    ImageConfig.PosterSize.W500.size,
-                    input.belongsToCollection.posterPath
-                ),
-            ),
             tagline = input.tagline,
             adult = input.adult,
             homepage = input.homepage,
@@ -128,10 +118,13 @@ object DataMapper {
 
     fun mapReviewsResponseToDomain(input: List<ReviewItem>) = input.map {
         val authorDetails = AuthorDetails(
-            avatarPath = generateImageLink(
-                ImageConfig.ProfileSize.W185.size,
-                it.authorDetails.avatarPath
-            ),
+
+            avatarPath = if (it.authorDetails.avatarPath != null)
+                generateImageLink(
+                    ImageConfig.ProfileSize.W185.size,
+                    it.authorDetails.avatarPath,
+                )
+            else null,
             name = it.authorDetails.name,
             rating = it.authorDetails.rating,
             username = it.authorDetails.username

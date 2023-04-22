@@ -2,10 +2,10 @@ package com.rivibi.mooviku.core.domain.model
 
 data class MovieDetail(
     val originalLanguage: String,
-    val imdbId: String,
+    val imdbId: String?,
     val video: Boolean,
     val title: String,
-    val backdropPath: String,
+    val backdropPath: String?,
     val revenue: Long,
     val genres: List<Genres>,
     val popularity: Double,
@@ -16,12 +16,11 @@ data class MovieDetail(
     val overview: String,
     val originalTitle: String,
     val runtime: Int,
-    val posterPath: String,
+    val posterPath: String?,
     val spokenLanguages: List<SpokenLanguages>,
     val productionCompanies: List<ProductionCompanies>,
     val releaseDate: String,
     val voteAverage: Double,
-    val belongsToCollection: BelongsToCollection,
     val tagline: String,
     val adult: Boolean,
     val homepage: String,
@@ -31,11 +30,4 @@ data class MovieDetail(
 data class ProductionCountries(
     val iso31661: String,
     val name: String
-)
-
-data class BelongsToCollection(
-    val backdropPath: String,
-    val name: String,
-    val id: Int,
-    val posterPath: String
 )

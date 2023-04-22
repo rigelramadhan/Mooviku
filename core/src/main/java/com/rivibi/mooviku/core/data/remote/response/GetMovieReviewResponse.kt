@@ -47,7 +47,7 @@ data class ReviewItem(
 data class AuthorDetails(
 
 	@field:SerializedName("avatar_path")
-	val avatarPath: String,
+	val avatarPath: String?,
 
 	@field:SerializedName("name")
 	val name: String,
