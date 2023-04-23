@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/app_bar_search"
+        android:id="@+id/bookmark"
         android:icon="@drawable/baseline_bookmark_border_24"
         android:title="@string/save"
         app:showAsAction="ifRoom"/>

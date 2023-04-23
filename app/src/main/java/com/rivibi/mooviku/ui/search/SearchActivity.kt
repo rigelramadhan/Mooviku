@@ -5,10 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -88,7 +88,7 @@ class SearchActivity : AppCompatActivity() {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     if (query != null) {
-                        performSearch(query)
+                        viewModel.loadData(query)
                     }
 
                     Toast.makeText(this@SearchActivity, "Search Triggered", Toast.LENGTH_SHORT)
