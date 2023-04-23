@@ -29,11 +29,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupView()
+        setupButtons()
 
         binding.tvMovieHomePopular.setOnClickListener {
             val intent = Intent(this, DetailActivity::class.java)
             intent.putExtra(DetailActivity.EXTRA_MOVIE_ID, 24)
             startActivity(intent)
+        }
+    }
+
+    private fun setupButtons() {
+        binding.btnIconSearch.setOnClickListener {
+            onSearchRequested()
         }
     }
 

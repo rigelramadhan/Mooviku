@@ -5,58 +5,72 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.MainActivity">
-    
-    <com.google.android.material.appbar.AppBarLayout
+
+    <View
         android:layout_width="match_parent"
-        android:background="#00FFFFFF"
-        app:elevation="0dp"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:menu="@menu/home_menu"
-            app:title="@string/label_home">
-
-
-
-        </com.google.android.material.appbar.MaterialToolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+        android:layout_height="120dp"
+        android:background="@drawable/dr_rectangle_gradient_linear_top"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/tv_label_home"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="sans-serif-black"
+                android:text="@string/label_home"
+                android:textSize="32sp"
+                app:layout_constraintEnd_toStartOf="@+id/btn_icon_search"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_icon_search"
+                style="@style/Widget.Material3.Button.IconButton.Filled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="#00000000"
+                app:icon="@drawable/baseline_search_24"
+                app:iconSize="32dp"
+                app:iconTint="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/tv_label_home"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_label_home" />
+
+            <TextView
                 android:id="@+id/tv_movie_home_popular"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/label_popular"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:fontFamily="sans-serif-medium"
-                android:textSize="18sp"
-                android:text="@string/label_popular"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_label_home" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_movie_home_popular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/tv_movie_home_popular"
+                android:layout_marginTop="16dp"
+                android:clipToPadding="false"
                 android:orientation="horizontal"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
-                android:layout_marginTop="16dp"
-                android:clipToPadding="false"
-                tools:listitem="@layout/item_card_movie"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/tv_movie_home_popular"
+                tools:listitem="@layout/item_card_movie" />
 
             <TextView
                 android:id="@+id/tv_movie_home_top_rated"
@@ -64,25 +78,25 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="32dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/label_top_rated"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_movie_home_popular"
-                android:fontFamily="sans-serif-medium"
-                android:textSize="18sp"
-                android:text="@string/label_top_rated"/>
+                app:layout_constraintTop_toBottomOf="@id/rv_movie_home_popular" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_movie_home_top_rated"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/tv_movie_home_top_rated"
+                android:layout_marginTop="16dp"
+                android:clipToPadding="false"
                 android:orientation="horizontal"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
-                android:layout_marginTop="16dp"
-                android:clipToPadding="false"
-                tools:listitem="@layout/item_card_movie"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/tv_movie_home_top_rated"
+                tools:listitem="@layout/item_card_movie" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

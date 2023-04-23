@@ -64,7 +64,7 @@ interface ApiService {
         @Query("api_key") apiKey: String = ApiConfig.API_KEY,
     ): GetMovieReviewResponse
 
-    @GET("movie/search")
+    @GET("search/movie")
     suspend fun getSearch(
         @Query("api_key") apiKey: String = ApiConfig.API_KEY,
         @Query("query") query: String,
