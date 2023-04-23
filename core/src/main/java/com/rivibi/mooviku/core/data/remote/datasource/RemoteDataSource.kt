@@ -141,4 +141,22 @@ class RemoteDataSource @Inject constructor(
             }
         }
     }
+
+    fun searchMovies(query: String, page: Int = 1): Flow<Resource<List<Movie>>> {
+        return flow {
+            try {
+                val response = apiService.getSearch(query = query, page = page)
+                val entities = DataMapper.mapResponseToEntity(response.results, category = "Others")
+                val data = DataMapper.mapEntityToDomain(entities)
+
+                if (data.isNotEmpty()) {
+                    emit(Resource.Success(data))
+                } else {
+                    emit(Resource.Error(ApiResponseMethod.ERROR_404.name))
+                }
+            } catch (e: Exception) {
+                emit(Resource.Error(e.message))
+            }
+        }
+    }
 }

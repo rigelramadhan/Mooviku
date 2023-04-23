@@ -32,5 +32,7 @@ class MovieInteractor @Inject constructor(
     override fun getMovieRecommendations(movieId: Int): Flow<Resource<List<Movie>>> =
         movieRepository.getMovieRecommendations(movieId)
 
+    override fun searchMovie(query: String): Flow<Resource<List<Movie>>> =
+        movieRepository.searchMovie(query)
 
 }

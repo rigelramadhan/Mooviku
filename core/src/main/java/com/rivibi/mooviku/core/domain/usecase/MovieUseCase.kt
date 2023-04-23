@@ -21,4 +21,6 @@ interface MovieUseCase {
     fun getReviews(movieId: Int): Flow<Resource<List<Review>>>
 
     fun getMovieRecommendations(movieId: Int): Flow<Resource<List<Movie>>>
+
+    fun searchMovie(query: String): Flow<Resource<List<Movie>>>
 }

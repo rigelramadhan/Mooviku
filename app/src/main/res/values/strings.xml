@@ -22,4 +22,5 @@
     <string name="description_profile_avatar">Profile avatar</string>
     <string name="placeholder_profile_name">Profile Name</string>
     <string name="label_more_like_this">More Like This</string>
+    <string name="search_hint">Enter a movie name</string>
 </resources>

@@ -121,4 +121,7 @@ class MovieRepository @Inject constructor(
 
     override fun getMovieRecommendations(movieId: Int): Flow<Resource<List<Movie>>> =
         remoteDataSource.getMovieRecommendations(movieId)
+
+    override fun searchMovie(query: String): Flow<Resource<List<Movie>>> =
+        remoteDataSource.searchMovies(query)
 }

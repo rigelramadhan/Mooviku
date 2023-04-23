@@ -63,4 +63,11 @@ interface ApiService {
         @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String = ApiConfig.API_KEY,
     ): GetMovieReviewResponse
+
+    @GET("movie/search")
+    suspend fun getSearch(
+        @Query("api_key") apiKey: String = ApiConfig.API_KEY,
+        @Query("query") query: String,
+        @Query("page") page: Int
+    ): GetMoviesListResponse
 }
