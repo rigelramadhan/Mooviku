@@ -52,4 +52,7 @@ data class MovieEntity(
 
     @field:SerializedName("category")
     val category: String,
+
+    @field:SerializedName("favorite")
+    val favorite: Boolean,
 )

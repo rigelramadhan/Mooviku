@@ -39,7 +39,8 @@ object DataMapper {
                 id = it.id,
                 adult = it.adult,
                 voteCount = it.voteCount,
-                category = category
+                category = category,
+                favorite = false
             )
         }
 
@@ -60,7 +61,8 @@ object DataMapper {
                 id = it.id,
                 adult = it.adult,
                 voteCount = it.voteCount,
-                category = it.category
+                category = it.category,
+                favorite = it.favorite
             )
         }
 

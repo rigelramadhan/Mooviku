@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
-
 @Singleton
 class MovieRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
@@ -124,4 +123,17 @@ class MovieRepository @Inject constructor(
 
     override fun searchMovie(query: String): Flow<Resource<List<Movie>>> =
         remoteDataSource.searchMovies(query)
+
+    override fun getFavoriteMovies(): Flow<List<Movie>> {
+        return localDataSource.getFavoriteMovies().map {
+            DataMapper.mapEntityToDomain(it)
+        }
+    }
+
+    override fun setFavorite(movieId: Int, isFavorite: Boolean) {
+        appExecutors.diskIO().execute {
+            localDataSource.setFavorite(movieId, isFavorite)
+        }
+    }
 }
+

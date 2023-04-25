@@ -23,4 +23,8 @@ interface IMovieRepository {
     fun getMovieRecommendations(movieId: Int): Flow<Resource<List<Movie>>>
 
     fun searchMovie(query: String): Flow<Resource<List<Movie>>>
+
+    fun getFavoriteMovies(): Flow<List<Movie>>
+
+    fun setFavorite(movieId: Int, isFavorite: Boolean)
 }
