@@ -14,9 +14,11 @@ import com.rivibi.mooviku.core.domain.repository.IMovieRepository
 import com.rivibi.mooviku.core.utils.AppExecutors
 import com.rivibi.mooviku.core.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
+
 @Singleton
 class MovieRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
@@ -134,6 +136,14 @@ class MovieRepository @Inject constructor(
         appExecutors.diskIO().execute {
             localDataSource.setFavorite(movieId, isFavorite)
         }
+    }
+
+    override fun checkFavorite(movieId: Int): Flow<Boolean> = flow {
+        emit(localDataSource.checkFavorite(movieId))
+    }
+
+    override suspend fun insertMovies(movies: List<Movie>) {
+        localDataSource.insertMovies(DataMapper.mapDomainToEntity(movies))
     }
 }
 

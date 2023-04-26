@@ -26,7 +26,7 @@ data class MovieEntity(
     val genreIds: GenreList,
 
     @field:SerializedName("poster_path")
-    val posterPath: String,
+    val posterPath: String?,
 
     @field:SerializedName("backdrop_path")
     val backdropPath: String?,
@@ -54,5 +54,5 @@ data class MovieEntity(
     val category: String,
 
     @field:SerializedName("favorite")
-    val favorite: Boolean,
+    var favorite: Boolean,
 )

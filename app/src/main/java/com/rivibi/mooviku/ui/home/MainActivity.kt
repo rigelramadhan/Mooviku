@@ -42,6 +42,10 @@ class MainActivity : AppCompatActivity() {
         binding.btnIconSearch.setOnClickListener {
             onSearchRequested()
         }
+
+        binding.btnIconFavorite.setOnClickListener {
+            moveToFavoriteActivity()
+        }
     }
 
     private fun setupView() {
@@ -99,7 +103,11 @@ class MainActivity : AppCompatActivity() {
 
                         is MainUiState.Error -> {
                             val errorMessage = mainUiState.exception.message
-                            Toast.makeText(this@MainActivity, errorMessage ?: "Error", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this@MainActivity,
+                                errorMessage ?: "Error",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
 
                         is MainUiState.Loading -> {
@@ -109,5 +117,14 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun moveToFavoriteActivity() {
+        startActivity(
+            Intent(
+                this,
+                Class.forName("com.rivibi.mooviku.favorite.ui.FavoriteActivity")
+            )
+        )
     }
 }

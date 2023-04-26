@@ -66,6 +66,48 @@ object DataMapper {
             )
         }
 
+    fun mapDomainToEntity(input: List<Movie>): List<MovieEntity> =
+        input.map {
+            MovieEntity(
+                overview = it.overview,
+                originalLanguage = it.originalLanguage,
+                originalTitle = it.originalTitle,
+                video = it.video,
+                title = it.title,
+                genreIds = GenreList(it.genreIds),
+                posterPath = it.posterPath,
+                backdropPath = it.backdropPath ,
+                releaseDate = it.releaseDate,
+                popularity = it.popularity,
+                voteAverage = it.voteAverage,
+                id = it.id,
+                adult = it.adult,
+                voteCount = it.voteCount,
+                category = it.category,
+                favorite = it.favorite
+            )
+        }
+
+    fun mapDetailToMovieListItem(input: MovieDetail, isFavorite: Boolean): Movie =
+        Movie(
+            overview = input.overview,
+            originalLanguage = input.originalLanguage,
+            originalTitle = input.originalTitle,
+            video = input.video,
+            title = input.title,
+            genreIds = input.genres.map { it.id },
+            posterPath = input.posterPath,
+            backdropPath = input.backdropPath ,
+            releaseDate = input.releaseDate,
+            popularity = input.popularity,
+            voteAverage = input.voteAverage,
+            id = input.id,
+            adult = input.adult,
+            voteCount = input.voteCount,
+            category = "",
+            favorite = isFavorite
+        )
+
     fun mapDetailResponseToDomain(input: GetDetailResponse): MovieDetail =
         MovieDetail(
             originalLanguage = input.originalLanguage,

@@ -4,34 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ui.detail.DetailActivity"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:context=".ui.detail.DetailActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        app:liftOnScroll="true"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/dark_blue_bg"
-        android:layout_height="wrap_content">
+        app:liftOnScroll="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             style="?attr/collapsingToolbarLayoutMediumStyle"
             android:layout_width="match_parent"
             android:layout_height="?attr/collapsingToolbarLayoutMediumSize"
-            app:titleCollapseMode="scale"
             android:backgroundTint="@color/dark_blue_bg"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:maxLines="3"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+            app:titleCollapseMode="scale">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:backgroundTint="@color/dark_blue_bg_lighter"
+                android:elevation="0dp"
+                app:layout_collapseMode="pin"
                 app:menu="@menu/detail_menu"
                 app:navigationIcon="@drawable/baseline_arrow_back_24"
-                android:backgroundTint="@color/dark_blue_bg_lighter"
                 app:title="@string/placeholder_movie_name"
-                app:titleTextAppearance="@style/TextAppearance.Material3.HeadlineSmall"
-                android:elevation="0dp"/>
+                app:titleTextAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -50,46 +51,46 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="32dp"
+                android:contentDescription="@string/description_movie_poster"
                 app:cornerRadius="16dp"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars"
-                android:contentDescription="@string/description_movie_poster"/>
+                tools:srcCompat="@tools:sample/avatars" />
 
             <ProgressBar
                 android:id="@+id/progress_bar_review"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:progress="80"
-                android:indeterminate="false"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:max="100"
-                android:progressDrawable="@drawable/dr_circular_progress_bar"
-                app:layout_constraintTop_toBottomOf="@id/img_movie_detail_poster"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
-                android:layout_marginStart="8dp"/>
-            
+                android:indeterminate="false"
+                android:max="100"
+                android:progress="80"
+                android:progressDrawable="@drawable/dr_circular_progress_bar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_movie_detail_poster" />
+
             <TextView
                 android:id="@+id/tv_review_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/progress_bar_review"
-                app:layout_constraintStart_toStartOf="@id/progress_bar_review"
-                app:layout_constraintEnd_toEndOf="@id/progress_bar_review"
-                app:layout_constraintBottom_toBottomOf="@id/progress_bar_review"
+                android:text="@string/placeholder_review"
                 android:textSize="24sp"
-                android:text="@string/placeholder_review"/>
+                app:layout_constraintBottom_toBottomOf="@id/progress_bar_review"
+                app:layout_constraintEnd_toEndOf="@id/progress_bar_review"
+                app:layout_constraintStart_toStartOf="@id/progress_bar_review"
+                app:layout_constraintTop_toTopOf="@id/progress_bar_review" />
 
             <ImageView
                 android:id="@+id/img_icon_calendar"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/baseline_calendar_month_24"
-                android:layout_marginTop="8dp"
                 android:layout_marginStart="14dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@string/description_release_date"
+                android:src="@drawable/baseline_calendar_month_24"
                 app:layout_constraintStart_toEndOf="@id/progress_bar_review"
-                app:layout_constraintTop_toTopOf="@id/progress_bar_review"
-                android:contentDescription="@string/description_release_date"/>
+                app:layout_constraintTop_toTopOf="@id/progress_bar_review" />
 
             <TextView
                 android:id="@+id/tv_detail_release_date"
@@ -97,47 +98,47 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="16dp"
-                android:textSize="16sp"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/placeholder_date_dd_mmm_yyyy"
-                app:layout_constraintTop_toTopOf="@id/img_icon_calendar"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@id/img_icon_calendar"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/img_icon_calendar"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toTopOf="@id/img_icon_calendar" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_detail_genre"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintStart_toStartOf="@id/img_icon_calendar"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:listitem="@layout/item_card_genre"
-                app:layout_constraintTop_toBottomOf="@id/img_icon_calendar"
                 android:layout_marginTop="8dp"
-                android:paddingEnd="16dp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
                 android:paddingStart="0dp"
-                android:clipToPadding="false"/>
+                android:paddingEnd="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/img_icon_calendar"
+                app:layout_constraintTop_toBottomOf="@id/img_icon_calendar"
+                tools:listitem="@layout/item_card_genre" />
 
             <TextView
                 android:id="@+id/tv_detail_movie_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/progress_bar_review"
                 android:layout_marginHorizontal="16dp"
-                android:fontFamily="sans-serif-light"
                 android:layout_marginTop="16dp"
-                android:text="@string/placeholder_description"/>
+                android:fontFamily="sans-serif-light"
+                android:text="@string/placeholder_description"
+                app:layout_constraintTop_toBottomOf="@id/progress_bar_review" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#00000000"
-                app:layout_constraintTop_toBottomOf="@id/tv_detail_movie_description"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="24dp"
-                android:layout_marginHorizontal="16dp">
+                android:backgroundTint="#00000000"
+                app:layout_constraintTop_toBottomOf="@id/tv_detail_movie_description">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -148,18 +149,17 @@
                         android:id="@+id/tv_label_details"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/details"
-                        android:textSize="16sp"
-                        android:fontFamily="sans-serif-medium"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="8dp"
-                        />
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/details"
+                        android:textSize="16sp" />
 
                     <com.google.android.material.divider.MaterialDivider
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginHorizontal="16dp"/>
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp" />
 
                     <TableLayout
                         android:layout_width="match_parent"
@@ -168,25 +168,25 @@
                         android:layout_marginVertical="16dp">
 
                         <TableRow>
-                            <TextView
-                                android:text="@string/languages"/>
 
-                            <View android:layout_width="16dp"/>
+                            <TextView android:text="@string/languages" />
+
+                            <View android:layout_width="16dp" />
 
                             <TextView
                                 android:id="@+id/tv_detail_language"
-                                android:text="@string/placeholder_language"/>
+                                android:text="@string/placeholder_language" />
                         </TableRow>
 
                         <TableRow>
-                            <TextView
-                                android:text="@string/label_country_of_origin"/>
 
-                            <View android:layout_width="16dp"/>
+                            <TextView android:text="@string/label_country_of_origin" />
+
+                            <View android:layout_width="16dp" />
 
                             <TextView
                                 android:id="@+id/tv_detail_origin"
-                                android:text="@string/placeholder_country_of_origin"/>
+                                android:text="@string/placeholder_country_of_origin" />
                         </TableRow>
                     </TableLayout>
 
@@ -198,70 +198,68 @@
                 android:id="@+id/tv_label_reviews"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/card_details"
-                app:layout_constraintStart_toStartOf="@id/card_details"
-                app:layout_constraintEnd_toStartOf="@id/btn_more_reviews"
+                android:layout_marginTop="32dp"
+                android:fontFamily="sans-serif-medium"
                 android:text="@string/reviews"
                 android:textSize="16sp"
-                android:fontFamily="sans-serif-medium"
-                android:layout_marginTop="32dp"/>
+                app:layout_constraintEnd_toStartOf="@id/btn_more_reviews"
+                app:layout_constraintStart_toStartOf="@id/card_details"
+                app:layout_constraintTop_toBottomOf="@id/card_details" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_more_reviews"
+                style="@style/Widget.Material3.Button.IconButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/Widget.Material3.Button.IconButton"
                 app:icon="@drawable/baseline_arrow_forward_24"
-                app:layout_constraintTop_toTopOf="@id/tv_label_reviews"
                 app:layout_constraintBottom_toBottomOf="@id/tv_label_reviews"
-                app:layout_constraintEnd_toEndOf="@id/card_details"/>
+                app:layout_constraintEnd_toEndOf="@id/card_details"
+                app:layout_constraintTop_toTopOf="@id/tv_label_reviews" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_reviews"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/item_review"
+                android:paddingTop="8dp"
                 app:layout_constraintTop_toBottomOf="@id/tv_label_reviews"
                 tools:itemCount="4"
-                android:paddingTop="8dp"
-                />
+                tools:listitem="@layout/item_review" />
 
             <TextView
                 android:id="@+id/tv_label_more_like_this"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/rv_reviews"
-                app:layout_constraintStart_toStartOf="@id/tv_label_reviews"
-                app:layout_constraintEnd_toStartOf="@id/btn_more_reviews"
+                android:layout_marginTop="32dp"
+                android:fontFamily="sans-serif-medium"
                 android:text="@string/label_more_like_this"
                 android:textSize="16sp"
-                android:fontFamily="sans-serif-medium"
-                android:layout_marginTop="32dp"/>
+                app:layout_constraintEnd_toStartOf="@id/btn_more_reviews"
+                app:layout_constraintStart_toStartOf="@id/tv_label_reviews"
+                app:layout_constraintTop_toBottomOf="@id/rv_reviews" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_more_more_like_this"
+                style="@style/Widget.Material3.Button.IconButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/Widget.Material3.Button.IconButton"
                 app:icon="@drawable/baseline_arrow_forward_24"
-                app:layout_constraintTop_toTopOf="@id/tv_label_more_like_this"
                 app:layout_constraintBottom_toBottomOf="@id/tv_label_more_like_this"
-                app:layout_constraintEnd_toEndOf="@id/btn_more_reviews"/>
+                app:layout_constraintEnd_toEndOf="@id/btn_more_reviews"
+                app:layout_constraintTop_toTopOf="@id/tv_label_more_like_this" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_more_like_this"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/item_card_movie"
                 android:layout_marginTop="12dp"
-                android:paddingStart="12dp"
-                android:paddingEnd="8dp"
                 android:clipToPadding="false"
-                app:layout_constraintTop_toBottomOf="@id/tv_label_more_like_this"
                 android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:paddingStart="12dp"
                 android:paddingTop="8dp"
-                />
+                android:paddingEnd="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/tv_label_more_like_this"
+                tools:listitem="@layout/item_card_movie" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

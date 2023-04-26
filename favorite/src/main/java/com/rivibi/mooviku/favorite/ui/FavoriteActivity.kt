@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.rivibi.mooviku.favorite.adapter.FavoriteMovieAdapter
 import com.rivibi.mooviku.favorite.databinding.ActivityFavoriteBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class FavoriteActivity : AppCompatActivity() {
 
     private val binding: ActivityFavoriteBinding by lazy {

@@ -2,18 +2,23 @@ package com.rivibi.mooviku.ui.detail
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.rivibi.mooviku.R
 import com.rivibi.mooviku.adapter.DetailGenreAdapter
 import com.rivibi.mooviku.adapter.DetailReviewAdapter
 import com.rivibi.mooviku.adapter.MovieListAdapter
+import com.rivibi.mooviku.core.domain.model.MovieDetail
 import com.rivibi.mooviku.databinding.ActivityDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -31,6 +36,9 @@ class DetailActivity : AppCompatActivity() {
     private val movieId: Int by lazy {
         intent.getIntExtra(EXTRA_MOVIE_ID, -1)
     }
+
+    private var isFavorite = false
+    private var movieDetail: MovieDetail? = null
 
     private var actionBar: ActionBar? = null
 
@@ -55,6 +63,18 @@ class DetailActivity : AppCompatActivity() {
                             val movieDetail = detailUiState.movieDetail
                             val reviews = detailUiState.reviews
                             val movieRecommendations = detailUiState.movieRecommendations
+                            val favorite = detailUiState.isFavorite
+
+                            isFavorite = favorite
+                            this@DetailActivity.movieDetail = movieDetail
+
+                            if (favorite) {
+                                Toast.makeText(
+                                    this@DetailActivity,
+                                    "FAVORITE!!!!!!!!!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
 
                             if (movieDetail != null) {
                                 actionBar?.title = movieDetail.title
@@ -77,10 +97,12 @@ class DetailActivity : AppCompatActivity() {
 
                                     tvDetailMovieDescription.text = movieDetail.overview
 
-                                    val avgRating = DecimalFormat("#.#").format(movieDetail.voteAverage)
+                                    val avgRating =
+                                        DecimalFormat("#.#").format(movieDetail.voteAverage)
 
                                     tvReviewRating.text = avgRating
-                                    progressBarReview.progress = movieDetail.voteAverage.times(10).toInt()
+                                    progressBarReview.progress =
+                                        movieDetail.voteAverage.times(10).toInt()
 
                                     rvReviews.apply {
                                         adapter = DetailReviewAdapter(reviews) {
@@ -132,6 +154,45 @@ class DetailActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (movieDetail != null) {
+            viewModel.updateFavorite(movieDetail as MovieDetail)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.detail_menu, menu)
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.favoriteState.collect { isFavorite ->
+                    menu.findItem(R.id.bookmark).icon = AppCompatResources.getDrawable(
+                        this@DetailActivity,
+                        if (isFavorite)
+                            R.drawable.baseline_bookmark_24
+                        else
+                            R.drawable.baseline_bookmark_border_24
+                    )
+                }
+            }
+        }
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.bookmark -> {
+                isFavorite = !isFavorite
+                viewModel.setFavorite(isFavorite)
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {

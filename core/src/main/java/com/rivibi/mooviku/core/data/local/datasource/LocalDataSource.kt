@@ -27,10 +27,12 @@ class LocalDataSource @Inject constructor(
         return movieDao.getMoviesByCategory(MovieCategory.Discover.category)
     }
 
-    suspend fun insertMovies(movies: List<MovieEntity>) = movieDao.insertMovies(movies)
+    suspend fun insertMovies(movies: List<MovieEntity>) = movieDao.insertMoviesWithFavorite(movies)
 
     fun getFavoriteMovies(): Flow<List<MovieEntity>> = movieDao.getFavoriteMovies()
 
     fun setFavorite(movieId: Int, isFavorite: Boolean) =
         movieDao.setFavorite(movieId, isFavorite)
+
+    suspend fun checkFavorite(movieId: Int) = movieDao.isMovieFavorite(movieId)
 }

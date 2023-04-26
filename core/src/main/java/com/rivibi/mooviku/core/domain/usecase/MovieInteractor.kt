@@ -39,4 +39,10 @@ class MovieInteractor @Inject constructor(
     override fun setFavorite(movieId: Int, isFavorite: Boolean) =
         movieRepository.setFavorite(movieId, isFavorite)
 
+    override fun checkFavorite(movieId: Int): Flow<Boolean> = movieRepository.checkFavorite(movieId)
+
+    override suspend fun insertMovies(movies: List<Movie>) {
+        movieRepository.insertMovies(movies)
+    }
+
 }

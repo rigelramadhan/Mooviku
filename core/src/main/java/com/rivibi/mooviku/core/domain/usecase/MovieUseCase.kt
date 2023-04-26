@@ -27,4 +27,8 @@ interface MovieUseCase {
     fun getFavoriteMovies(): Flow<List<Movie>>
 
     fun setFavorite(movieId: Int, isFavorite: Boolean)
+
+    fun checkFavorite(movieId: Int): Flow<Boolean>
+
+    suspend fun insertMovies(movies: List<Movie>)
 }
