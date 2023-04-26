@@ -11,7 +11,28 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
 
-    // HILT
+    implementation "com.google.android.material:material:$material_version"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+
+    implementation "androidx.compose.material3:material3:$material3_version"
+    implementation "androidx.compose.material3:material3-window-size-class:$material3_version"
+
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_runtime_ktx_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_runtime_ktx_version"
+
+    implementation "androidx.activity:activity-ktx:$activity_version"
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+//    GLIDE
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+
+//    HILT
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
     kapt "androidx.hilt:hilt-compiler:$hilt_jetpack_version"

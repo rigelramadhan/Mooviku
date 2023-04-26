@@ -1,11 +1,13 @@
 package com.rivibi.mooviku.favorite.ui
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.rivibi.mooviku.core.domain.model.Movie
 import com.rivibi.mooviku.core.domain.usecase.MovieUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,7 +24,11 @@ class FavoriteViewModel @Inject constructor(
     }
 
     private fun loadData() {
-
+        viewModelScope.launch {
+            movieUseCase.getFavoriteMovies().collect {
+                _uiState.value = FavoriteUiState.Success(it)
+            }
+        }
     }
 }
 

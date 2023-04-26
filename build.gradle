@@ -11,10 +11,18 @@ buildscript {
         junit_version = '4.13.2'
         android_junit_version = '1.1.5'
         espresso_core_version = '3.5.1'
+        material_version = '1.8.0'
+        material3_version = '1.1.0-rc01'
+        navigation_version = '2.5.3'
+        activity_version = '1.7.1'
+        fragment_version = '1.5.7'
 
-        // APP
+        // HILT
         hilt_version = '2.44'
         hilt_jetpack_version = '1.0.0-alpha03'
+
+        // GLIDE
+        glide_version = '4.13.1'
 
         // CORE
         room_version = '2.5.1'

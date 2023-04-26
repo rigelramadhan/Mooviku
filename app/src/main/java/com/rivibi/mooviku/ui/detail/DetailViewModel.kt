@@ -54,6 +54,7 @@ class DetailViewModel @Inject constructor(
                 _uiState.value = DetailUiState.Error(it)
             }.collect { detailUiState ->
                 _uiState.value = detailUiState
+                _favoriteState.value = detailUiState.isFavorite
             }
         }
     }

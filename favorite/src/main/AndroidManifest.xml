@@ -16,6 +16,7 @@
         android:name="com.rivibi.mooviku.MainApplication">
         <activity
             android:name=".ui.FavoriteActivity"
+            android:label="@string/title_favorite"
             android:exported="false" />
     </application>
 
