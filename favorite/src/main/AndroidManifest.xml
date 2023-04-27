@@ -12,11 +12,11 @@
         <dist:fusing dist:include="true" />
     </dist:module>
 
-    <application
-        android:name="com.rivibi.mooviku.MainApplication">
+    <application>
         <activity
             android:name=".ui.FavoriteActivity"
             android:label="@string/title_favorite"
+            android:theme="@style/Theme.Mooviku.NoActionBar"
             android:exported="false" />
     </application>
 

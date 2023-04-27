@@ -2,14 +2,17 @@ package com.rivibi.mooviku.favorite.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.rivibi.mooviku.R
 import com.rivibi.mooviku.core.di.FavoriteModuleDependencies
 import com.rivibi.mooviku.favorite.adapter.FavoriteMovieAdapter
 import com.rivibi.mooviku.favorite.databinding.ActivityFavoriteBinding
@@ -48,6 +51,8 @@ class FavoriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.toolbar)
+
         setupView()
     }
 
@@ -70,19 +75,34 @@ class FavoriteActivity : AppCompatActivity() {
                                 layoutManager =
                                     StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
                             }
+                            binding.progressBar.isVisible = false
                         }
 
                         is FavoriteUiState.Error -> {
-                            Toast.makeText(this@FavoriteActivity, "ERROR", Toast.LENGTH_SHORT)
-                                .show()
+                            binding.progressBar.isVisible = false
+                            Toast.makeText(
+                                this@FavoriteActivity,
+                                getString(R.string.default_error_message),
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
 
                         is FavoriteUiState.Loading -> {
-
+                            binding.progressBar.isVisible = true
                         }
                     }
                 }
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressedDispatcher.onBackPressed()
+                return true
+            }
+        }
+        return super.onContextItemSelected(item)
     }
 }

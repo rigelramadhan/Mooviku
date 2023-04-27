@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.rivibi.mooviku.R
 import com.rivibi.mooviku.adapter.MovieListAdapter
 import com.rivibi.mooviku.databinding.ActivityMainBinding
 import com.rivibi.mooviku.ui.detail.DetailActivity
@@ -58,18 +60,6 @@ class MainActivity : AppCompatActivity() {
                             val popularMovies = mainUiState.popularMovies
                             val topRatedMovies = mainUiState.topRatedMovies
 
-                            if (popularMovies.isEmpty()) Toast.makeText(
-                                this@MainActivity,
-                                "Popular empty",
-                                Toast.LENGTH_SHORT
-                            ).show()
-
-                            if (topRatedMovies.isEmpty()) Toast.makeText(
-                                this@MainActivity,
-                                "Top rated empty",
-                                Toast.LENGTH_SHORT
-                            ).show()
-
                             binding.rvMovieHomePopular.apply {
                                 adapter = MovieListAdapter(popularMovies) { movieId ->
                                     val intent =
@@ -99,19 +89,21 @@ class MainActivity : AppCompatActivity() {
                                     false
                                 )
                             }
+
+                            binding.progressBar.isVisible = false
                         }
 
                         is MainUiState.Error -> {
-                            val errorMessage = mainUiState.exception.message
+                            binding.progressBar.isVisible = false
                             Toast.makeText(
                                 this@MainActivity,
-                                errorMessage ?: "Error",
+                                getString(R.string.default_error_message),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
 
                         is MainUiState.Loading -> {
-                            Toast.makeText(this@MainActivity, "Loading", Toast.LENGTH_SHORT).show()
+                            binding.progressBar.isVisible = true
                         }
                     }
                 }

@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -67,14 +68,6 @@ class DetailActivity : AppCompatActivity() {
 
                             isFavorite = favorite
                             this@DetailActivity.movieDetail = movieDetail
-
-                            if (favorite) {
-                                Toast.makeText(
-                                    this@DetailActivity,
-                                    "FAVORITE!!!!!!!!!",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
 
                             if (movieDetail != null) {
                                 actionBar?.title = movieDetail.title
@@ -136,19 +129,22 @@ class DetailActivity : AppCompatActivity() {
                                         )
                                     }
                                 }
-                            } else {
-                                Toast.makeText(this@DetailActivity, "empty", Toast.LENGTH_SHORT)
-                                    .show()
                             }
+
+                            binding.progressBar.isVisible = false
                         }
 
                         is DetailUiState.Error -> {
-                            Toast.makeText(this@DetailActivity, "error", Toast.LENGTH_SHORT).show()
+                            binding.progressBar.isVisible = false
+                            Toast.makeText(
+                                this@DetailActivity,
+                                getString(R.string.default_error_message),
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
 
                         is DetailUiState.Loading -> {
-                            Toast.makeText(this@DetailActivity, "loading", Toast.LENGTH_SHORT)
-                                .show()
+                            binding.progressBar.isVisible = true
                         }
                     }
                 }
@@ -189,6 +185,11 @@ class DetailActivity : AppCompatActivity() {
             R.id.bookmark -> {
                 isFavorite = !isFavorite
                 viewModel.setFavorite(isFavorite)
+            }
+
+            android.R.id.home -> {
+                onBackPressedDispatcher.onBackPressed()
+                return true
             }
         }
 

@@ -9,6 +9,7 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -62,15 +63,21 @@ class SearchActivity : AppCompatActivity() {
                                         StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
                                 }
                             }
+
+                            binding.progressBar.isVisible = false
                         }
 
                         is SearchUiState.Error -> {
-                            Toast.makeText(this@SearchActivity, "ERROR", Toast.LENGTH_SHORT).show()
+                            binding.progressBar.isVisible = false
+                            Toast.makeText(
+                                this@SearchActivity,
+                                getString(R.string.default_error_message),
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
 
                         is SearchUiState.Loading -> {
-                            Toast.makeText(this@SearchActivity, "Loading", Toast.LENGTH_SHORT)
-                                .show()
+                            binding.progressBar.isVisible = true
                         }
                     }
                 }
@@ -91,8 +98,6 @@ class SearchActivity : AppCompatActivity() {
                         viewModel.loadData(query)
                     }
 
-                    Toast.makeText(this@SearchActivity, "Search Triggered", Toast.LENGTH_SHORT)
-                        .show()
                     return false
                 }
 
