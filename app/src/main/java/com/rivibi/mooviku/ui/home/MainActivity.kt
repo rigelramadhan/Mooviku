@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         setupView()
         setupButtons()
 
+        binding.progressBar.isVisible = true
         binding.tvMovieHomePopular.setOnClickListener {
             val intent = Intent(this, DetailActivity::class.java)
             intent.putExtra(DetailActivity.EXTRA_MOVIE_ID, 24)

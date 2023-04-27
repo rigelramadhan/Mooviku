@@ -55,6 +55,9 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setupView() {
+        binding.btnMoreReviews.isVisible = false
+        binding.btnMoreReviews.isVisible = false
+
         viewModel.loadData(movieId)
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
