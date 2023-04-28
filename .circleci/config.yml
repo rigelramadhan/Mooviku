@@ -14,7 +14,6 @@ jobs:
                 name: Chmod permission
                 command:
                     sudo chmod +x ./gradlew
-                    ./gradlew androidDependencies
             - save_cache:
                   paths:
                       - ~/.android/build-cache
