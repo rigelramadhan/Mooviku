@@ -12,7 +12,9 @@ jobs:
                 key: android-orb-v1-
             - run:
                 name: Chmod permission
-                command: sudo chmod +x ./gradlew androidDependencies
+                command:
+                    sudo chmod +x ./gradlew
+                    ./gradlew androidDependencies
             - save_cache:
                   paths:
                       - ~/.android/build-cache
