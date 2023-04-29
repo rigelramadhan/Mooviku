@@ -1,14 +1,14 @@
 package com.rivibi.mooviku.core.data.remote.network
 
+import com.rivibi.mooviku.core.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiConfig {
-    const val API_KEY = "41914f0e3b5bbb109fe6d762f3fc0cca"
-    private const val BASE_URL = "https://api.themoviedb.org/3/"
-    private const val IMAGE_URL = "https://image.tmdb.org/t/p/"
+    const val API_KEY = BuildConfig.KEY
+    private const val BASE_URL = BuildConfig.BASE_URL
 
     fun getApiService(): ApiService {
         val loggingInterceptor =

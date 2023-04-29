@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.bumptech.glide.Glide
 import com.rivibi.mooviku.core.domain.model.Movie
+import com.rivibi.mooviku.core.utils.loadImage
 import com.rivibi.mooviku.databinding.ItemCardMovieDynamicBinding
 
 class DynamicMovieListAdapter(private val list: List<Movie>, private val onClick: (Int) -> Unit) :
@@ -37,10 +37,7 @@ class DynamicMovieListAdapter(private val list: List<Movie>, private val onClick
                     it.tvMovieCardTitle.text = movie.title
                     it.tvMovieCardReleaseDate.text = movie.releaseDate
 
-                    Glide.with(binding.root.context)
-                        .load(movie.posterPath)
-                        .centerCrop()
-                        .into(it.imgMovieCard)
+                    it.imgMovieCard.loadImage(movie.posterPath)
                 }
             }
     }

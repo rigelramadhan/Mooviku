@@ -15,6 +15,8 @@ android {
         targetSdk 33
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "KEY", '"41914f0e3b5bbb109fe6d762f3fc0cca"')
+        buildConfigField("String", "BASE_URL", '"https://api.themoviedb.org/3/"')
     }
 
     buildTypes {

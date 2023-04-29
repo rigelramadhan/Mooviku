@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.bumptech.glide.Glide
 import com.rivibi.mooviku.core.domain.model.Movie
+import com.rivibi.mooviku.core.utils.loadImage
 import com.rivibi.mooviku.databinding.ItemCardMovieBinding
 
 class MovieListAdapter(private val list: List<Movie>, private val onClick: (Int) -> Unit) : Adapter<MovieListAdapter.ViewHolder>() {
@@ -35,10 +35,7 @@ class MovieListAdapter(private val list: List<Movie>, private val onClick: (Int)
                 it.tvMovieCardTitle.text = movie.title
                 it.tvMovieCardReleaseDate.text = movie.releaseDate
 
-                Glide.with(binding.root.context)
-                    .load(movie.posterPath)
-                    .centerCrop()
-                    .into(it.imgMovieCard)
+                it.imgMovieCard.loadImage(movie.posterPath)
             }
         }
     }

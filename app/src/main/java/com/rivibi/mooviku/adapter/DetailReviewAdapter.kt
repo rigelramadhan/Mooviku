@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.bumptech.glide.Glide
 import com.rivibi.mooviku.core.domain.model.Review
+import com.rivibi.mooviku.core.utils.loadImage
 import com.rivibi.mooviku.databinding.ItemReviewBinding
 
 class DetailReviewAdapter(private val list: List<Review>, private val onClick: (String) -> Unit) :
@@ -41,9 +41,7 @@ class DetailReviewAdapter(private val list: List<Review>, private val onClick: (
                 tvReviewComment.text = review.content
                 tvReviewDate.text = review.createdAt
 
-                Glide.with(binding.root.context)
-                    .load(review.authorDetails.avatarPath)
-                    .into(imgReviewAvatar)
+                imgReviewAvatar.loadImage(review.authorDetails.avatarPath)
             }
         }
     }
