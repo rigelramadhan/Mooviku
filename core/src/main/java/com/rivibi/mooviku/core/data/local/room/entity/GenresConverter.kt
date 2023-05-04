@@ -1,5 +1,6 @@
 package com.rivibi.mooviku.core.data.local.room.entity
 
+import android.os.Build
 import androidx.room.TypeConverter
 
 class GenresConverter {
@@ -12,8 +13,10 @@ class GenresConverter {
     @TypeConverter
     fun genresToStoredString(value: GenreList): String {
         var str = ""
-        value.genreIds.forEach {
-            str += "$it,"
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            value.genreIds.forEach {
+                str += "$it,"
+            }
         }
 
         return str

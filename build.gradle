@@ -17,18 +17,21 @@ buildscript {
         activity_version = '1.7.1'
         fragment_version = '1.5.7'
 
-        // HILT
+//        HILT
         hilt_version = '2.44'
         hilt_jetpack_version = '1.0.0-alpha03'
 
-        // GLIDE
+//        GLIDE
         glide_version = '4.13.1'
 
-        // CORE
+//        CORE
         room_version = '2.5.1'
         retrofit_version = '2.9.0'
         logging_interceptor_version = '5.0.0-alpha.11'
         kotlin_coroutines_version = '1.6.4'
+
+//        LINT
+        lint_version = "31.0.0"
     }
 
     dependencies {

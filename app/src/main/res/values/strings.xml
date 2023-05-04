@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Mooviku</string>
     <string name="content_description_movie_image">Movie image</string>
     <string name="placeholder_movie_name">Movie Name</string>
@@ -24,5 +24,5 @@
     <string name="label_more_like_this">More Like This</string>
     <string name="search_hint">Enter a movie name</string>
     <string name="title_favorite">Favorite</string>
-    <string name="default_error_message">Something went wrong</string>
+    <string name="default_error_message" tools:override="true">Something went wrong</string>
 </resources>
