@@ -14,10 +14,13 @@ import com.rivibi.mooviku.core.domain.model.ProductionCompanies
 import com.rivibi.mooviku.core.domain.model.ProductionCountries
 import com.rivibi.mooviku.core.domain.model.Review
 import com.rivibi.mooviku.core.domain.model.SpokenLanguages
-
 object DataMapper {
-    private fun generateImageLink(imgSize: String, path: String): String =
+    private fun generateImageLink(imgSize: String, path: String): String = if (path[0] == '/') {
         "${ImageConfig.IMAGE_URL}$imgSize/$path"
+    } else {
+        path
+    }
+
 
     fun mapResponseToEntity(input: List<MoviesItem>, category: String): List<MovieEntity> =
         input.map {
@@ -185,3 +188,4 @@ object DataMapper {
         )
     }
 }
+

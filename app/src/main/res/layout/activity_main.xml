@@ -86,6 +86,16 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_movie_home_popular"
                 tools:listitem="@layout/item_card_movie" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_more_popular"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/baseline_arrow_forward_24"
+                app:layout_constraintBottom_toBottomOf="@id/tv_movie_home_popular"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_movie_home_popular" />
+
             <TextView
                 android:id="@+id/tv_movie_home_top_rated"
                 android:layout_width="0dp"
@@ -111,6 +121,16 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@id/tv_movie_home_top_rated"
                 tools:listitem="@layout/item_card_movie" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_more_top_rated"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/baseline_arrow_forward_24"
+                app:layout_constraintBottom_toBottomOf="@id/tv_movie_home_top_rated"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_movie_home_top_rated" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

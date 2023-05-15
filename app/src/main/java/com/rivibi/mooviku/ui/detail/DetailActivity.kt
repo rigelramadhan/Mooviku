@@ -21,6 +21,8 @@ import com.rivibi.mooviku.adapter.DetailReviewAdapter
 import com.rivibi.mooviku.adapter.MovieListAdapter
 import com.rivibi.mooviku.core.domain.model.MovieDetail
 import com.rivibi.mooviku.databinding.ActivityDetailBinding
+import com.rivibi.mooviku.ui.movielist.MovieListActivity
+import com.rivibi.mooviku.ui.utils.MovieQueryTypes
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
@@ -52,12 +54,19 @@ class DetailActivity : AppCompatActivity() {
         actionBar?.title = ""
 
         setupView()
+        setupButton()
+    }
+
+    private fun setupButton() {
+        binding.btnMoreMoreLikeThis.setOnClickListener {
+            val intent = Intent(this, MovieListActivity::class.java)
+            intent.putExtra(MovieListActivity.EXTRA_QUERY_TYPE, MovieQueryTypes.RECOMMENDATION)
+            intent.putExtra(MovieListActivity.EXTRA_RECOMMENDATION_MOVIE_ID, movieId)
+            startActivity(intent)
+        }
     }
 
     private fun setupView() {
-        binding.btnMoreReviews.isVisible = false
-        binding.btnMoreReviews.isVisible = false
-
         viewModel.loadData(movieId)
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {

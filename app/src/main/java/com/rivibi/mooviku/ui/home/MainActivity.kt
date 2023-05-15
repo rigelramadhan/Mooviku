@@ -14,6 +14,8 @@ import com.rivibi.mooviku.R
 import com.rivibi.mooviku.adapter.MovieListAdapter
 import com.rivibi.mooviku.databinding.ActivityMainBinding
 import com.rivibi.mooviku.ui.detail.DetailActivity
+import com.rivibi.mooviku.ui.movielist.MovieListActivity
+import com.rivibi.mooviku.ui.utils.MovieQueryTypes
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -48,6 +50,18 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnIconFavorite.setOnClickListener {
             moveToFavoriteActivity()
+        }
+
+        binding.btnMorePopular.setOnClickListener {
+            val intent = Intent(this, MovieListActivity::class.java)
+            intent.putExtra(MovieListActivity.EXTRA_QUERY_TYPE, MovieQueryTypes.POPULAR)
+            startActivity(intent)
+        }
+
+        binding.btnMoreTopRated.setOnClickListener {
+            val intent = Intent(this, MovieListActivity::class.java)
+            intent.putExtra(MovieListActivity.EXTRA_QUERY_TYPE, MovieQueryTypes.TOP_RATED)
+            startActivity(intent)
         }
     }
 
