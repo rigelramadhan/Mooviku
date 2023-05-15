@@ -14,11 +14,22 @@ import com.rivibi.mooviku.core.domain.model.ProductionCompanies
 import com.rivibi.mooviku.core.domain.model.ProductionCountries
 import com.rivibi.mooviku.core.domain.model.Review
 import com.rivibi.mooviku.core.domain.model.SpokenLanguages
+
 object DataMapper {
-    private fun generateImageLink(imgSize: String, path: String): String = if (path[0] == '/') {
-        "${ImageConfig.IMAGE_URL}$imgSize/$path"
-    } else {
-        path
+    private fun generateImageLink(
+        imgSize: String,
+        path: String?,
+        defaultImage: String = "https://www.stignatius.co.uk/wp-content/uploads/2020/10/default-user-icon.jpg"
+    ): String {
+        return if (path != null) {
+            if (path[0] == 'h') {
+                path
+            } else {
+                "${ImageConfig.IMAGE_URL}$imgSize/$path"
+            }
+        } else {
+            defaultImage
+        }
     }
 
 
@@ -57,7 +68,7 @@ object DataMapper {
                 title = it.title,
                 genreIds = it.genreIds.genreIds,
                 posterPath = it.posterPath,
-                backdropPath = it.backdropPath ,
+                backdropPath = it.backdropPath,
                 releaseDate = it.releaseDate,
                 popularity = it.popularity,
                 voteAverage = it.voteAverage,
@@ -79,7 +90,7 @@ object DataMapper {
                 title = it.title,
                 genreIds = GenreList(it.genreIds),
                 posterPath = it.posterPath,
-                backdropPath = it.backdropPath ,
+                backdropPath = it.backdropPath,
                 releaseDate = it.releaseDate,
                 popularity = it.popularity,
                 voteAverage = it.voteAverage,
@@ -100,7 +111,7 @@ object DataMapper {
             title = input.title,
             genreIds = input.genres.map { it.id },
             posterPath = input.posterPath,
-            backdropPath = input.backdropPath ,
+            backdropPath = input.backdropPath,
             releaseDate = input.releaseDate,
             popularity = input.popularity,
             voteAverage = input.voteAverage,
