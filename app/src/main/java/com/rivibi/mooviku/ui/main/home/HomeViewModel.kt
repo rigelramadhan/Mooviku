@@ -1,4 +1,4 @@
-package com.rivibi.mooviku.ui.home
+package com.rivibi.mooviku.ui.main.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,15 +10,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
+class HomeViewModel(
     private val movieUseCase: MovieUseCase
 ) : ViewModel() {
-
-    private val _uiState: MutableStateFlow<MainUiState> = MutableStateFlow(MainUiState.Loading())
-    val uiState: StateFlow<MainUiState> get() = _uiState
+    private val _uiState: MutableStateFlow<HomeUiState> = MutableStateFlow(HomeUiState.Loading())
+    val uiState: StateFlow<HomeUiState> get() = _uiState
 
     fun loadData() {
         viewModelScope.launch {
@@ -26,26 +24,26 @@ class MainViewModel @Inject constructor(
             val topRatedMoviesFlow = movieUseCase.getTopRated()
 
             combine(popularMoviesFlow, topRatedMoviesFlow) { popular, topRated ->
-                MainUiState.Success(
+                HomeUiState.Success(
                     popular.data ?: emptyList(),
                     topRated.data ?: emptyList(),
                 )
             }.catch {
                 it.printStackTrace()
-                _uiState.value = MainUiState.Error(it)
-            }.collect { mainUiState ->
-                _uiState.value = mainUiState
+                _uiState.value = HomeUiState.Error(it)
+            }.collect { homeUiState ->
+                _uiState.value = homeUiState
             }
         }
     }
 }
 
-sealed class MainUiState {
+sealed class HomeUiState {
     data class Success(
         val popularMovies: List<Movie>,
         val topRatedMovies: List<Movie>
-    ) : MainUiState()
+    ) : HomeUiState()
 
-    data class Error(val exception: Throwable) : MainUiState()
-    data class Loading(val message: String? = null) : MainUiState()
+    data class Error(val exception: Throwable) : HomeUiState()
+    data class Loading(val message: String? = null) : HomeUiState()
 }

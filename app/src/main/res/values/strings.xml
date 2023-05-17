@@ -25,4 +25,5 @@
     <string name="search_hint">Enter a movie name</string>
     <string name="title_favorite">Favorite</string>
     <string name="default_error_message" tools:override="true">Something went wrong</string>
+    <string name="label_discover">Discover</string>
 </resources>
