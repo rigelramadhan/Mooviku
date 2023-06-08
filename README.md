@@ -2,6 +2,12 @@
 ### Project Description
 **Mooviku** is a movie app that allows users to browse and discover movies using TheMovieDB API. This app is still under development and aims to provide a seamless experience for movie enthusiasts.
 
+### Screenshots
+| Image 1 | Image 2 | Image 3 | Image 4 | Image 5 |
+|---------|---------|---------|---------|---------|
+| ![Image 1](images/screenshot1.jpg) | ![Image 2](images/screenshot2.jpg) | ![Image 3](images/screenshot3.jpg) | ![Image 4](images/screenshot4.jpg) | ![Image 5](images/screenshot5.jpg) |
+| Home screen | Movie detail screen, expanding top app bar containing the title and bookmark functionality | Movie detail screen, detailed information on the movie | Movie detail screen, reviews and movie recommendations | Search feature |
+
 ### Tools and Practices Used
 
 - **Clean Architecture**
