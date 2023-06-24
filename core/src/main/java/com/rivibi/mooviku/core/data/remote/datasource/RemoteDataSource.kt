@@ -2,10 +2,12 @@ package com.rivibi.mooviku.core.data.remote.datasource
 
 import android.util.Log
 import com.rivibi.mooviku.core.data.Resource
+import com.rivibi.mooviku.core.data.local.MovieCategory
 import com.rivibi.mooviku.core.data.remote.ApiResponse
 import com.rivibi.mooviku.core.data.remote.ApiResponseMethod
 import com.rivibi.mooviku.core.data.remote.network.ApiService
 import com.rivibi.mooviku.core.data.remote.response.MoviesItem
+import com.rivibi.mooviku.core.domain.model.Genres
 import com.rivibi.mooviku.core.domain.model.Movie
 import com.rivibi.mooviku.core.domain.model.MovieDetail
 import com.rivibi.mooviku.core.domain.model.Review
@@ -80,7 +82,7 @@ class RemoteDataSource @Inject constructor(
     }
 
     fun getDiscover(
-        page: Int = 1
+        page: Int = 1,
     ): Flow<ApiResponse<List<MoviesItem>>> {
         return flow {
             try {
@@ -99,14 +101,48 @@ class RemoteDataSource @Inject constructor(
         }
     }
 
+    fun getGenres(): Flow<Resource<List<Genres>>> {
+        return flow {
+            emit(Resource.Loading())
+            try {
+                val response = apiService.getGenreList()
+                val data = response.genres.map { Genres(id = it.id, name = it.name) }
+
+                emit(Resource.Success(data))
+            } catch (e: Exception) {
+                emit(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    fun getMoviesByGenre(
+        page: Int = 1,
+        genreId: Int,
+    ): Flow<Resource<List<Movie>>> {
+        return flow {
+            emit(Resource.Loading())
+            try {
+                val response = apiService.getDiscoverWithGenres(page = page, genreId = genreId)
+                val data =
+                    DataMapper.mapResponseToEntity(response.results, MovieCategory.Genre.category)
+
+                if (data.isNotEmpty()) {
+                    emit(Resource.Success(DataMapper.mapEntityToDomain(data)))
+                }
+            } catch (e: Exception) {
+                emit(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
     fun getMovieDetail(movieId: Int): Flow<Resource<MovieDetail>> {
         return channelFlow {
+            send(Resource.Loading())
             try {
                 val response = apiService.getMovieDetail(movieId = movieId)
                 val data = DataMapper.mapDetailResponseToDomain(response)
                 send(Resource.Success(data))
             } catch (e: Exception) {
-                Log.e("MOOVIKU_ERROR", e.message.toString())
                 send(Resource.Error(e.message.toString()))
             }
         }
@@ -114,6 +150,7 @@ class RemoteDataSource @Inject constructor(
 
     fun getMovieReviews(movieId: Int): Flow<Resource<List<Review>>> {
         return flow {
+            emit(Resource.Loading())
             try {
                 val response = apiService.getMovieReviews(movieId = movieId)
                 val data = DataMapper.mapReviewsResponseToDomain(response.results)
@@ -126,6 +163,7 @@ class RemoteDataSource @Inject constructor(
 
     fun getMovieRecommendations(movieId: Int): Flow<Resource<List<Movie>>> {
         return flow {
+            emit(Resource.Loading())
             try {
                 val response = apiService.getMovieRecommendations(movieId = movieId)
                 val entities = DataMapper.mapResponseToEntity(response.results, category = "Others")
@@ -144,6 +182,7 @@ class RemoteDataSource @Inject constructor(
 
     fun searchMovies(query: String, page: Int = 1): Flow<Resource<List<Movie>>> {
         return flow {
+            emit(Resource.Loading())
             try {
                 val response = apiService.getSearch(query = query, page = page)
                 val entities = DataMapper.mapResponseToEntity(response.results, category = "Others")

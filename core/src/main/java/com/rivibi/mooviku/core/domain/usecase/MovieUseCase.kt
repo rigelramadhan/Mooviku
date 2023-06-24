@@ -1,6 +1,7 @@
 package com.rivibi.mooviku.core.domain.usecase
 
 import com.rivibi.mooviku.core.data.Resource
+import com.rivibi.mooviku.core.domain.model.Genres
 import com.rivibi.mooviku.core.domain.model.Movie
 import com.rivibi.mooviku.core.domain.model.MovieDetail
 import com.rivibi.mooviku.core.domain.model.Review
@@ -31,4 +32,8 @@ interface MovieUseCase {
     fun checkFavorite(movieId: Int): Flow<Boolean>
 
     suspend fun insertMovies(movies: List<Movie>)
+
+    fun getGenres(): Flow<Resource<List<Genres>>>
+
+    fun getMoviesByGenre(page: Int = 1, genreId: Int): Flow<Resource<List<Movie>>>
 }

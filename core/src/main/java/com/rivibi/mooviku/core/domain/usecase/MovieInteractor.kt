@@ -1,6 +1,7 @@
 package com.rivibi.mooviku.core.domain.usecase
 
 import com.rivibi.mooviku.core.data.Resource
+import com.rivibi.mooviku.core.domain.model.Genres
 import com.rivibi.mooviku.core.domain.model.Movie
 import com.rivibi.mooviku.core.domain.model.MovieDetail
 import com.rivibi.mooviku.core.domain.model.Review
@@ -45,5 +46,10 @@ class MovieInteractor @Inject constructor(
     override suspend fun insertMovies(movies: List<Movie>) {
         movieRepository.insertMovies(movies)
     }
+
+    override fun getGenres(): Flow<Resource<List<Genres>>> = movieRepository.getGenres()
+
+    override fun getMoviesByGenre(page: Int, genreId: Int): Flow<Resource<List<Movie>>> =
+        movieRepository.getMoviesByGenre(page, genreId)
 
 }

@@ -7,6 +7,7 @@ import com.rivibi.mooviku.core.data.local.datasource.LocalDataSource
 import com.rivibi.mooviku.core.data.remote.ApiResponse
 import com.rivibi.mooviku.core.data.remote.datasource.RemoteDataSource
 import com.rivibi.mooviku.core.data.remote.response.MoviesItem
+import com.rivibi.mooviku.core.domain.model.Genres
 import com.rivibi.mooviku.core.domain.model.Movie
 import com.rivibi.mooviku.core.domain.model.MovieDetail
 import com.rivibi.mooviku.core.domain.model.Review
@@ -113,6 +114,11 @@ class MovieRepository @Inject constructor(
             override fun shouldFetch(data: List<Movie>?) = true
 
         }.asFlow()
+
+    override fun getGenres(): Flow<Resource<List<Genres>>> = remoteDataSource.getGenres()
+
+    override fun getMoviesByGenre(page: Int, genreId: Int): Flow<Resource<List<Movie>>> =
+        remoteDataSource.getMoviesByGenre(page, genreId)
 
     override fun getMovieDetail(movieId: Int): Flow<Resource<MovieDetail>> =
         remoteDataSource.getMovieDetail(movieId)

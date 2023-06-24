@@ -1,6 +1,7 @@
 package com.rivibi.mooviku.core.domain.repository
 
 import com.rivibi.mooviku.core.data.Resource
+import com.rivibi.mooviku.core.domain.model.Genres
 import com.rivibi.mooviku.core.domain.model.Movie
 import com.rivibi.mooviku.core.domain.model.MovieDetail
 import com.rivibi.mooviku.core.domain.model.Review
@@ -31,4 +32,8 @@ interface IMovieRepository {
     fun checkFavorite(movieId: Int): Flow<Boolean>
 
     suspend fun insertMovies(movies: List<Movie>)
+
+    fun getMoviesByGenre(page: Int, genreId: Int): Flow<Resource<List<Movie>>>
+
+    fun getGenres(): Flow<Resource<List<Genres>>>
 }

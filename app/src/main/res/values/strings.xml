@@ -26,4 +26,7 @@
     <string name="title_favorite">Favorite</string>
     <string name="default_error_message" tools:override="true">Something went wrong</string>
     <string name="label_discover">Discover</string>
+    <string name="deskripsi_shared_items">Deskripsi Shared Items</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
 </resources>
