@@ -3,10 +3,10 @@ package com.rivibi.mooviku.ui.main.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -43,16 +43,17 @@ class HomeFragment : Fragment() {
 
         setupView()
         setupButtons()
+        setupMenu()
     }
 
     private fun setupButtons() {
-        binding.btnIconSearch.setOnClickListener {
-            requireActivity().onSearchRequested()
-        }
-
-        binding.btnIconFavorite.setOnClickListener {
-            moveToFavoriteActivity()
-        }
+//        binding.btnIconSearch.setOnClickListener {
+//            requireActivity().onSearchRequested()
+//        }
+//
+//        binding.btnIconFavorite.setOnClickListener {
+//            moveToFavoriteActivity()
+//        }
 
         binding.btnMorePopular.setOnClickListener {
             val intent = Intent(requireContext(), MovieListActivity::class.java)
@@ -135,5 +136,18 @@ class HomeFragment : Fragment() {
                 Class.forName("com.rivibi.mooviku.favorite.ui.FavoriteActivity")
             )
         )
+    }
+
+    private fun setupMenu() {
+        (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.home_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return true
+            }
+
+        })
     }
 }

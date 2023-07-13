@@ -10,14 +10,22 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/dark_blue_bg</item>
+        <item name="android:statusBarColor">@color/lighter_blue</item>
         <!-- Customize your theme here. -->
         <item name="android:colorBackground">@color/dark_blue_bg</item>
+        <item name="actionBarStyle">@style/PrimaryActionBar</item>
+    </style>
+    
+    <style name="PrimaryActionBar" parent="Widget.Material3.ActionBar.Solid">
+        <item name="background">@color/lighter_blue</item>
+        <item name="elevation">0dp</item>
     </style>
 
     <style name="Theme.Mooviku.NoActionBar" parent="Theme.Material3.Dark.NoActionBar">
         <item name="android:colorBackground">@color/dark_blue_bg</item>
         <item name="android:statusBarColor">@color/dark_blue_bg</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="CardContainer">
