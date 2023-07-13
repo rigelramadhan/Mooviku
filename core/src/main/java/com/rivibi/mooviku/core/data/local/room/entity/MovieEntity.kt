@@ -50,9 +50,6 @@ data class MovieEntity(
     @field:SerializedName("vote_count")
     val voteCount: Int,
 
-    @field:SerializedName("category")
-    val category: String,
-
     @field:SerializedName("favorite")
     var favorite: Boolean,
 )

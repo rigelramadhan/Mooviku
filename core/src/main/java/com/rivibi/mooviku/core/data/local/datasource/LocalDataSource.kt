@@ -1,8 +1,9 @@
 package com.rivibi.mooviku.core.data.local.datasource
 
-import com.rivibi.mooviku.core.data.local.MovieCategory
 import com.rivibi.mooviku.core.data.local.room.database.MovieDao
 import com.rivibi.mooviku.core.data.local.room.entity.MovieEntity
+import com.rivibi.mooviku.core.utils.SortFilter
+import com.rivibi.mooviku.core.utils.SortQuery
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -11,20 +12,12 @@ import javax.inject.Singleton
 class LocalDataSource @Inject constructor(
     private val movieDao: MovieDao
 ) {
-    fun getPopularMovies(): Flow<List<MovieEntity>> {
-        return movieDao.getMoviesByCategory(MovieCategory.Popular.category)
-    }
-
-    fun getNowPlaying(): Flow<List<MovieEntity>> {
-        return movieDao.getMoviesByCategory(MovieCategory.NowPlaying.category)
-    }
-
-    fun getTopRated(): Flow<List<MovieEntity>> {
-        return movieDao.getMoviesByCategory(MovieCategory.TopRated.category)
-    }
-
-    fun getDiscover(): Flow<List<MovieEntity>> {
-        return movieDao.getMoviesByCategory(MovieCategory.Discover.category)
+    fun getMovies(
+        sortFilter: SortFilter = SortFilter.Default,
+        genreId: Int = -1
+    ): Flow<List<MovieEntity>> {
+        val query = SortQuery.getSortedMovieByFilter(sortFilter, genreId)
+        return movieDao.getMoviesByCategory(query)
     }
 
     suspend fun insertMovies(movies: List<MovieEntity>) = movieDao.insertMoviesWithFavorite(movies)

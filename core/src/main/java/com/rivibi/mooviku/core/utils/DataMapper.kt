@@ -6,14 +6,7 @@ import com.rivibi.mooviku.core.data.local.room.entity.MovieEntity
 import com.rivibi.mooviku.core.data.remote.response.GetDetailResponse
 import com.rivibi.mooviku.core.data.remote.response.MoviesItem
 import com.rivibi.mooviku.core.data.remote.response.ReviewItem
-import com.rivibi.mooviku.core.domain.model.AuthorDetails
-import com.rivibi.mooviku.core.domain.model.Genres
-import com.rivibi.mooviku.core.domain.model.Movie
-import com.rivibi.mooviku.core.domain.model.MovieDetail
-import com.rivibi.mooviku.core.domain.model.ProductionCompanies
-import com.rivibi.mooviku.core.domain.model.ProductionCountries
-import com.rivibi.mooviku.core.domain.model.Review
-import com.rivibi.mooviku.core.domain.model.SpokenLanguages
+import com.rivibi.mooviku.core.domain.model.*
 
 object DataMapper {
     private fun generateImageLink(
@@ -33,7 +26,7 @@ object DataMapper {
     }
 
 
-    fun mapResponseToEntity(input: List<MoviesItem>, category: String): List<MovieEntity> =
+    fun mapResponseToEntity(input: List<MoviesItem>): List<MovieEntity> =
         input.map {
             MovieEntity(
                 overview = it.overview,
@@ -53,7 +46,6 @@ object DataMapper {
                 id = it.id,
                 adult = it.adult,
                 voteCount = it.voteCount,
-                category = category,
                 favorite = false
             )
         }
@@ -75,7 +67,6 @@ object DataMapper {
                 id = it.id,
                 adult = it.adult,
                 voteCount = it.voteCount,
-                category = it.category,
                 favorite = it.favorite
             )
         }
@@ -97,7 +88,6 @@ object DataMapper {
                 id = it.id,
                 adult = it.adult,
                 voteCount = it.voteCount,
-                category = it.category,
                 favorite = it.favorite
             )
         }
@@ -118,7 +108,6 @@ object DataMapper {
             id = input.id,
             adult = input.adult,
             voteCount = input.voteCount,
-            category = "",
             favorite = isFavorite
         )
 

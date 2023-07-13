@@ -2,7 +2,6 @@ package com.rivibi.mooviku.core.data.remote.datasource
 
 import android.util.Log
 import com.rivibi.mooviku.core.data.Resource
-import com.rivibi.mooviku.core.data.local.MovieCategory
 import com.rivibi.mooviku.core.data.remote.ApiResponse
 import com.rivibi.mooviku.core.data.remote.ApiResponseMethod
 import com.rivibi.mooviku.core.data.remote.network.ApiService
@@ -12,6 +11,7 @@ import com.rivibi.mooviku.core.domain.model.Movie
 import com.rivibi.mooviku.core.domain.model.MovieDetail
 import com.rivibi.mooviku.core.domain.model.Review
 import com.rivibi.mooviku.core.utils.DataMapper
+import com.rivibi.mooviku.core.utils.SortAttribute
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.flow
@@ -118,19 +118,21 @@ class RemoteDataSource @Inject constructor(
     fun getMoviesByGenre(
         page: Int = 1,
         genreId: Int,
-    ): Flow<Resource<List<Movie>>> {
+        sortBy: String = SortAttribute.SORT_NONE,
+    ): Flow<ApiResponse<List<MoviesItem>>> {
         return flow {
-            emit(Resource.Loading())
             try {
-                val response = apiService.getDiscoverWithGenres(page = page, genreId = genreId)
-                val data =
-                    DataMapper.mapResponseToEntity(response.results, MovieCategory.Genre.category)
+                val response =
+                    apiService.getMoviesByGenre(page = page, genreId = genreId, sortBy = sortBy)
+                val data = response.results
 
                 if (data.isNotEmpty()) {
-                    emit(Resource.Success(DataMapper.mapEntityToDomain(data)))
+                    emit(ApiResponse.Success(data))
+                } else {
+                    emit(ApiResponse.Error(ApiResponseMethod.ERROR_404))
                 }
             } catch (e: Exception) {
-                emit(Resource.Error(e.message.toString()))
+                emit(ApiResponse.Error(ApiResponseMethod.ERROR_ELSE))
             }
         }
     }
@@ -166,7 +168,7 @@ class RemoteDataSource @Inject constructor(
             emit(Resource.Loading())
             try {
                 val response = apiService.getMovieRecommendations(movieId = movieId)
-                val entities = DataMapper.mapResponseToEntity(response.results, category = "Others")
+                val entities = DataMapper.mapResponseToEntity(response.results)
                 val data = DataMapper.mapEntityToDomain(entities)
 
                 if (data.isNotEmpty()) {
@@ -185,7 +187,7 @@ class RemoteDataSource @Inject constructor(
             emit(Resource.Loading())
             try {
                 val response = apiService.getSearch(query = query, page = page)
-                val entities = DataMapper.mapResponseToEntity(response.results, category = "Others")
+                val entities = DataMapper.mapResponseToEntity(response.results)
                 val data = DataMapper.mapEntityToDomain(entities)
 
                 if (data.isNotEmpty()) {
@@ -198,4 +200,23 @@ class RemoteDataSource @Inject constructor(
             }
         }
     }
+
+//    fun getMoviesByGenre(page: Int = 1, genreId: Int, sortBy: SortFilter): Flow<Resource<List<Movie>>> {
+//        return flow {
+//            emit(Resource.Loading())
+//            try {
+//                val sortQuery = when (sortBy) {
+//                    SortFilter.Popularity -> SortQuery.popularity
+//                    SortFilter.Latest -> SortQuery.latest
+//                }
+//                val response = apiService.getMoviesByGenre(
+//                    page = page,
+//                    genreId = genreId,
+//                    sortBy = sortQuery,
+//                )
+//
+//
+//            }
+//        }
+//    }
 }

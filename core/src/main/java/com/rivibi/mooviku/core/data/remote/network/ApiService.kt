@@ -41,13 +41,6 @@ interface ApiService {
         @Query("page") page: Int,
     ): GetMoviesListResponse
 
-    @GET("movie/discover")
-    suspend fun getDiscoverWithGenres(
-        @Query("api_key") apiKey: String = ApiConfig.API_KEY,
-        @Query("page") page: Int,
-        @Query("with_genres") genreId: Int,
-    ): GetMoviesListResponse
-
     @GET("genre/movie/list")
     suspend fun getGenreList(
         @Query("api_key") apiKey: String = ApiConfig.API_KEY,
@@ -76,5 +69,13 @@ interface ApiService {
         @Query("api_key") apiKey: String = ApiConfig.API_KEY,
         @Query("query") query: String,
         @Query("page") page: Int
+    ): GetMoviesListResponse
+
+    @GET("discover/movie")
+    fun getMoviesByGenre(
+        @Query("api_key") apiKey: String = ApiConfig.API_KEY,
+        @Query("with_genres") genreId: Int,
+        @Query("sort_by") sortBy: String,
+        @Query("page") page: Int,
     ): GetMoviesListResponse
 }
