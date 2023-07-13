@@ -52,4 +52,10 @@ class MovieInteractor @Inject constructor(
     override fun getMoviesByGenre(page: Int, genreId: Int): Flow<Resource<List<Movie>>> =
         movieRepository.getMoviesByGenre(page, genreId)
 
+    override fun getPopularMoviesByGenre(page: Int, genreId: Int): Flow<Resource<List<Movie>>> =
+        movieRepository.getPopularMoviesByGenre(page, genreId)
+
+    override fun getLatestMoviesByGenre(page: Int, genreId: Int): Flow<Resource<List<Movie>>> =
+        movieRepository.getLatestMoviesByGenre(page, genreId)
+
 }

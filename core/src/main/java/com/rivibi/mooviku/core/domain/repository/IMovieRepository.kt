@@ -36,4 +36,8 @@ interface IMovieRepository {
     fun getMoviesByGenre(page: Int, genreId: Int): Flow<Resource<List<Movie>>>
 
     fun getGenres(): Flow<Resource<List<Genres>>>
+
+    fun getPopularMoviesByGenre(page: Int = 1, genreId: Int): Flow<Resource<List<Movie>>>
+
+    fun getLatestMoviesByGenre(page: Int = 1, genreId: Int): Flow<Resource<List<Movie>>>
 }

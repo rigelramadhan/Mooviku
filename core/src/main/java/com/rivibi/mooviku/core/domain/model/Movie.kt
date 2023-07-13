@@ -15,6 +15,5 @@ data class Movie(
     val id: Int,
     val adult: Boolean,
     val voteCount: Int,
-    val category: String,
     val favorite: Boolean,
 )
