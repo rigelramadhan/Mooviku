@@ -19,12 +19,14 @@ import com.rivibi.mooviku.adapter.MovieListAdapter
 import com.rivibi.mooviku.databinding.FragmentHomeBinding
 import com.rivibi.mooviku.ui.detail.DetailActivity
 import com.rivibi.mooviku.ui.movielist.MovieListActivity
+import com.rivibi.mooviku.ui.search.SearchActivity
 import com.rivibi.mooviku.ui.utils.MovieQueryTypes
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
+
     private val viewModel: HomeViewModel by viewModels()
 
     private val binding: FragmentHomeBinding by lazy {
@@ -47,14 +49,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupButtons() {
-//        binding.btnIconSearch.setOnClickListener {
-//            requireActivity().onSearchRequested()
-//        }
-//
-//        binding.btnIconFavorite.setOnClickListener {
-//            moveToFavoriteActivity()
-//        }
-
         binding.btnMorePopular.setOnClickListener {
             val intent = Intent(requireContext(), MovieListActivity::class.java)
             intent.putExtra(MovieListActivity.EXTRA_QUERY_TYPE, MovieQueryTypes.POPULAR)
@@ -138,13 +132,28 @@ class HomeFragment : Fragment() {
         )
     }
 
+    private fun moveToSearchActivity() {
+        startActivity(
+            Intent(
+                requireContext(),
+                SearchActivity::class.java
+            )
+        )
+    }
+
     private fun setupMenu() {
         (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menu.clear()
                 menuInflater.inflate(R.menu.home_menu, menu)
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                when (menuItem.itemId) {
+                    R.id.bookmark -> moveToFavoriteActivity()
+                    R.id.search -> moveToSearchActivity()
+                }
+
                 return true
             }
 

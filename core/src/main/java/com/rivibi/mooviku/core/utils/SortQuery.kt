@@ -10,14 +10,14 @@ object SortQuery {
     ): SimpleSQLiteQuery {
         val query = StringBuilder("SELECT * FROM movies")
 
-        if (genreId > -1) query.append(" WHERE genre LIKE '%$genreId,%'")
+        if (genreId > -1) query.append(" WHERE genreIds LIKE '%$genreId,%'")
 
         when (sortFilter) {
-            SortFilter.Popularity -> query.append(" SORT BY popularity DSC")
+            SortFilter.Popularity -> query.append(" ORDER BY popularity DESC")
 
-            SortFilter.Latest -> query.append(" SORT BY release_date ASC")
+            SortFilter.Latest -> query.append(" ORDER BY releaseDate ASC")
 
-            SortFilter.TopRated -> query.append(" SORT BY vote_average DSC")
+            SortFilter.TopRated -> query.append(" ORDER BY voteAverage DESC")
 
             else -> {}
         }

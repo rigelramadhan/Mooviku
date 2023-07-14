@@ -16,9 +16,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.rivibi.mooviku.R
-import com.rivibi.mooviku.adapter.DetailGenreAdapter
 import com.rivibi.mooviku.adapter.DetailReviewAdapter
 import com.rivibi.mooviku.adapter.MovieListAdapter
+import com.rivibi.mooviku.adapter.SmallGenreAdapter
 import com.rivibi.mooviku.core.domain.model.MovieDetail
 import com.rivibi.mooviku.databinding.ActivityDetailBinding
 import com.rivibi.mooviku.ui.movielist.MovieListActivity
@@ -92,7 +92,7 @@ class DetailActivity : AppCompatActivity() {
                                     tvDetailReleaseDate.text = movieDetail.releaseDate
 
                                     rvDetailGenre.apply {
-                                        adapter = DetailGenreAdapter(movieDetail.genres)
+                                        adapter = SmallGenreAdapter(movieDetail.genres) {}
                                         layoutManager = LinearLayoutManager(
                                             this@DetailActivity,
                                             LinearLayoutManager.HORIZONTAL,

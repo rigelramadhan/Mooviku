@@ -9,5 +9,13 @@
         android:id="@+id/navigation_home"
         android:name="com.rivibi.mooviku.ui.main.home.HomeFragment"
         android:label="@string/label_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_genreFragment"
+            app:destination="@id/navigation_genre" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_genre"
+        android:name="com.rivibi.mooviku.ui.main.genre.GenreFragment"
+        android:label="@string/label_genres" />
 </navigation>

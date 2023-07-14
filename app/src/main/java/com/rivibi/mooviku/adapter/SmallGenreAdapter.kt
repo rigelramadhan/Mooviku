@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rivibi.mooviku.core.domain.model.Genres
 import com.rivibi.mooviku.databinding.ItemCardGenreBinding
 
-class DetailGenreAdapter(private val list: List<Genres>) :
-    RecyclerView.Adapter<DetailGenreAdapter.ViewHolder>() {
+class SmallGenreAdapter(private val list: List<Genres>, private val onClick: (Int) -> Unit) :
+    RecyclerView.Adapter<SmallGenreAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -23,14 +23,15 @@ class DetailGenreAdapter(private val list: List<Genres>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val genre = list[position]
-        holder.bind(genre)
+        holder.bind(genre, onClick)
     }
 
     class ViewHolder(private val binding: ItemCardGenreBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(genre: Genres) {
+        fun bind(genre: Genres, onClick: (Int) -> Unit) {
             binding.tvGenre.text = genre.name
+            binding.tvGenre.setOnClickListener { onClick(genre.id) }
         }
     }
 }

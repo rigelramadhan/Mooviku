@@ -30,4 +30,6 @@
     <string name="deskripsi_shared_items">Deskripsi Shared Items</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
+    <string name="label_genres">Genres</string>
+    <string name="label_latest">Latest</string>
 </resources>
