@@ -72,7 +72,7 @@ interface ApiService {
     ): GetMoviesListResponse
 
     @GET("discover/movie")
-    fun getMoviesByGenre(
+    suspend fun getMoviesByGenre(
         @Query("api_key") apiKey: String = ApiConfig.API_KEY,
         @Query("with_genres") genreId: Int,
         @Query("sort_by") sortBy: String,

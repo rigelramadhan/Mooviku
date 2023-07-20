@@ -23,6 +23,7 @@ class GenreViewModel @Inject constructor(
 
     fun loadData(genreId: Int = DEFAULT_GENRE_ID) {
         viewModelScope.launch {
+            _uiState.value = GenreUiState.Loading("Loading")
             val genresFlow = movieUseCase.getGenres()
             val popularMoviesFlow = movieUseCase.getPopularMoviesByGenre(genreId = genreId)
             val latestMoviesFlow = movieUseCase.getLatestMoviesByGenre(genreId = genreId)

@@ -120,19 +120,19 @@ class RemoteDataSource @Inject constructor(
         genreId: Int,
         sortBy: String = SortAttribute.SORT_NONE,
     ): Flow<ApiResponse<List<MoviesItem>>> {
-        return flow {
+        return channelFlow {
             try {
                 val response =
                     apiService.getMoviesByGenre(page = page, genreId = genreId, sortBy = sortBy)
                 val data = response.results
 
                 if (data.isNotEmpty()) {
-                    emit(ApiResponse.Success(data))
+                    send(ApiResponse.Success(data))
                 } else {
-                    emit(ApiResponse.Error(ApiResponseMethod.ERROR_404))
+                    send(ApiResponse.Error(ApiResponseMethod.ERROR_404))
                 }
             } catch (e: Exception) {
-                emit(ApiResponse.Error(ApiResponseMethod.ERROR_ELSE))
+                send(ApiResponse.Error(ApiResponseMethod.ERROR_ELSE, e.message.toString()))
             }
         }
     }
