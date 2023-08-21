@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.widget.SearchView
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
@@ -20,6 +19,7 @@ import com.rivibi.mooviku.adapter.DynamicMovieListAdapter
 import com.rivibi.mooviku.databinding.ActivitySearchBinding
 import com.rivibi.mooviku.ui.detail.DetailActivity
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchActivity : AppCompatActivity() {
 
@@ -27,7 +27,7 @@ class SearchActivity : AppCompatActivity() {
         ActivitySearchBinding.inflate(layoutInflater)
     }
 
-    private val viewModel: SearchViewModel by viewModels()
+    private val viewModel: SearchViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

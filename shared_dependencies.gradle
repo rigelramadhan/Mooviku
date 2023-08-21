@@ -35,6 +35,6 @@ dependencies {
 //    KOIN
     implementation "io.insert-koin:koin-core:$koin_version"
     implementation "io.insert-koin:koin-android:$koin_version"
-    implementation "io.insert-koin:koin-android-viewmodel:$koin_version"
+    implementation "io.insert-koin:koin-androidx-navigation:$koin_version"
 
 }

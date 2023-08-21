@@ -2,7 +2,6 @@ package com.rivibi.mooviku.ui.movielist
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
@@ -15,6 +14,7 @@ import com.rivibi.mooviku.databinding.ActivityMovieListBinding
 import com.rivibi.mooviku.ui.detail.DetailActivity
 import com.rivibi.mooviku.ui.utils.MovieQueryTypes
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieListActivity : AppCompatActivity() {
 
@@ -22,7 +22,7 @@ class MovieListActivity : AppCompatActivity() {
         ActivityMovieListBinding.inflate(layoutInflater)
     }
 
-    private val viewModel: MovieListViewModel by viewModels()
+    private val viewModel: MovieListViewModel by viewModel()
 
     private val movieQueryType: String by lazy {
         intent.getStringExtra(EXTRA_QUERY_TYPE) ?: MovieQueryTypes.DISCOVERY

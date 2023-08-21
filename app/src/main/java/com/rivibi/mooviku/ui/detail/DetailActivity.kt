@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
@@ -24,6 +23,7 @@ import com.rivibi.mooviku.databinding.ActivityDetailBinding
 import com.rivibi.mooviku.ui.movielist.MovieListActivity
 import com.rivibi.mooviku.ui.utils.MovieQueryTypes
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.DecimalFormat
 
 class DetailActivity : AppCompatActivity() {
@@ -32,7 +32,7 @@ class DetailActivity : AppCompatActivity() {
         ActivityDetailBinding.inflate(layoutInflater)
     }
 
-    private val viewModel: DetailViewModel by viewModels()
+    private val viewModel: DetailViewModel by viewModel()
 
     private val movieId: Int by lazy {
         intent.getIntExtra(EXTRA_MOVIE_ID, -1)

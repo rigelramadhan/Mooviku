@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -19,10 +18,11 @@ import com.rivibi.mooviku.adapter.SmallGenreAdapter
 import com.rivibi.mooviku.databinding.FragmentGenreBinding
 import com.rivibi.mooviku.ui.detail.DetailActivity
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GenreFragment : Fragment() {
 
-    private val viewModel: GenreViewModel by viewModels()
+    private val viewModel: GenreViewModel by viewModel()
 
     private val binding: FragmentGenreBinding by lazy {
         FragmentGenreBinding.inflate(layoutInflater)
