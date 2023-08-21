@@ -23,11 +23,9 @@ import com.rivibi.mooviku.core.domain.model.MovieDetail
 import com.rivibi.mooviku.databinding.ActivityDetailBinding
 import com.rivibi.mooviku.ui.movielist.MovieListActivity
 import com.rivibi.mooviku.ui.utils.MovieQueryTypes
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 
-@AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
 
     private val binding: ActivityDetailBinding by lazy {

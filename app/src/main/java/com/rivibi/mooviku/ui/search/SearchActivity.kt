@@ -19,10 +19,8 @@ import com.rivibi.mooviku.R
 import com.rivibi.mooviku.adapter.DynamicMovieListAdapter
 import com.rivibi.mooviku.databinding.ActivitySearchBinding
 import com.rivibi.mooviku.ui.detail.DetailActivity
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
 class SearchActivity : AppCompatActivity() {
 
     private val binding: ActivitySearchBinding by lazy {

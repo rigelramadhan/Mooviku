@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
@@ -13,15 +12,13 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.rivibi.mooviku.R
-import com.rivibi.mooviku.core.di.FavoriteModuleDependencies
 import com.rivibi.mooviku.favorite.adapter.FavoriteMovieAdapter
 import com.rivibi.mooviku.favorite.databinding.ActivityFavoriteBinding
-import com.rivibi.mooviku.favorite.di.DaggerFavoriteComponent
-import com.rivibi.mooviku.favorite.di.ViewModelFactory
+import com.rivibi.mooviku.favorite.di.favoriteModule
 import com.rivibi.mooviku.ui.detail.DetailActivity
-import dagger.hilt.android.EntryPointAccessors
 import kotlinx.coroutines.launch
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
 
 class FavoriteActivity : AppCompatActivity() {
 
@@ -29,28 +26,17 @@ class FavoriteActivity : AppCompatActivity() {
         ActivityFavoriteBinding.inflate(layoutInflater)
     }
 
-    @Inject
-    lateinit var factory: ViewModelFactory
+    private val viewModel: FavoriteViewModel by viewModel()
 
-    private val viewModel: FavoriteViewModel by viewModels {
-        factory
-    }
+    private val modules by lazy { loadKoinModules(favoriteModule) }
+
+    private fun loadModules() = modules
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        DaggerFavoriteComponent.builder()
-            .context(this)
-            .appDependencies(
-                EntryPointAccessors.fromApplication(
-                    applicationContext,
-                    FavoriteModuleDependencies::class.java
-                )
-            )
-            .build()
-            .inject(this)
-
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        loadModules()
         setSupportActionBar(binding.toolbar)
 
         setupView()

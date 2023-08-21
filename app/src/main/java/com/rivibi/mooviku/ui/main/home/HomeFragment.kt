@@ -3,7 +3,12 @@ package com.rivibi.mooviku.ui.main.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -21,10 +26,8 @@ import com.rivibi.mooviku.ui.detail.DetailActivity
 import com.rivibi.mooviku.ui.movielist.MovieListActivity
 import com.rivibi.mooviku.ui.search.SearchActivity
 import com.rivibi.mooviku.ui.utils.MovieQueryTypes
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private val viewModel: HomeViewModel by viewModels()

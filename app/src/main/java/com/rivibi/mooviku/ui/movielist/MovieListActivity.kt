@@ -14,10 +14,8 @@ import com.rivibi.mooviku.adapter.DynamicMovieListAdapter
 import com.rivibi.mooviku.databinding.ActivityMovieListBinding
 import com.rivibi.mooviku.ui.detail.DetailActivity
 import com.rivibi.mooviku.ui.utils.MovieQueryTypes
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
 class MovieListActivity : AppCompatActivity() {
 
     private val binding: ActivityMovieListBinding by lazy {

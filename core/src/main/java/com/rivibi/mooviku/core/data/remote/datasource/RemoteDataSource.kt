@@ -15,11 +15,8 @@ import com.rivibi.mooviku.core.utils.SortAttribute
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.flow
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class RemoteDataSource @Inject constructor(
+class RemoteDataSource(
     private val apiService: ApiService
 ) {
     fun getNowPlaying(

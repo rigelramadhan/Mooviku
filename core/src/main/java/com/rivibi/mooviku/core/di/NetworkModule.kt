@@ -1,20 +1,22 @@
 package com.rivibi.mooviku.core.di
 
 import com.rivibi.mooviku.core.data.remote.network.ApiConfig
-import com.rivibi.mooviku.core.data.remote.network.ApiService
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import org.koin.dsl.module
 
-@Module
-@InstallIn(SingletonComponent::class)
-object NetworkModule {
+val networkModule = module {
 
-    @Provides
-    @Singleton
-    fun provideApiService(): ApiService {
-        return ApiConfig.getApiService()
+    single {
+        ApiConfig.getApiService()
     }
 }
+
+//@Module
+//@InstallIn(SingletonComponent::class)
+//object NetworkModule {
+//
+//    @Provides
+//    @Singleton
+//    fun provideApiService(): ApiService {
+//        return ApiConfig.getApiService()
+//    }
+//}

@@ -7,9 +7,8 @@ import com.rivibi.mooviku.core.domain.model.MovieDetail
 import com.rivibi.mooviku.core.domain.model.Review
 import com.rivibi.mooviku.core.domain.repository.IMovieRepository
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
-class MovieInteractor @Inject constructor(
+class MovieInteractor(
     private val movieRepository: IMovieRepository
 ) : MovieUseCase {
     override fun getNowPlaying(page: Int): Flow<Resource<List<Movie>>> =

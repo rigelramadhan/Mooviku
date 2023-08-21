@@ -18,10 +18,8 @@ import com.rivibi.mooviku.adapter.MovieListAdapter
 import com.rivibi.mooviku.adapter.SmallGenreAdapter
 import com.rivibi.mooviku.databinding.FragmentGenreBinding
 import com.rivibi.mooviku.ui.detail.DetailActivity
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
 class GenreFragment : Fragment() {
 
     private val viewModel: GenreViewModel by viewModels()

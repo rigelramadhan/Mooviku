@@ -5,11 +5,8 @@ import com.rivibi.mooviku.core.data.local.room.entity.MovieEntity
 import com.rivibi.mooviku.core.utils.SortFilter
 import com.rivibi.mooviku.core.utils.SortQuery
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class LocalDataSource @Inject constructor(
+class LocalDataSource(
     private val movieDao: MovieDao
 ) {
     fun getMovies(

@@ -5,16 +5,13 @@ import androidx.lifecycle.viewModelScope
 import com.rivibi.mooviku.core.domain.model.Genres
 import com.rivibi.mooviku.core.domain.model.Movie
 import com.rivibi.mooviku.core.domain.usecase.MovieUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class GenreViewModel @Inject constructor(
+class GenreViewModel (
     private val movieUseCase: MovieUseCase
 ) : ViewModel() {
 
